@@ -90,3 +90,6 @@ addAll(3,6)
 Maximum call stack size exceeded
 ```
 
+### 思考
+1.什么是执行上下文，它包含了哪些属性？
+2.变量环境与词法环境的相同点与差异点？
