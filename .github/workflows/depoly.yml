@@ -1,6 +1,8 @@
 name: Deploy Blog
 
-on: [push] # 当有新tag时运行
+on:   
+ tags:
+    - 'v*'
 
 jobs:
   build: # 一项叫做build的任务
@@ -26,3 +28,8 @@ jobs:
       run: |
         # publish
         hexo clean && hexo generate # 执行部署程序
+    - name: Commit
+      run: |
+        git commit -am "feat: rebuild docs"
+        git push
+
