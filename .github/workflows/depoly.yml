@@ -1,6 +1,6 @@
 name: Deploy Blog
 
-on: [tag] # 当有新tag时运行
+on: [push] # 当有新tag时运行
 
 jobs:
   build: # 一项叫做build的任务
@@ -17,8 +17,6 @@ jobs:
         node-version: "10.x"
     
     - name: Setup Hexo env
-      env:
-        ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
       run: |
         # install dependencies
         npm i -g hexo-cli # 安装hexo
