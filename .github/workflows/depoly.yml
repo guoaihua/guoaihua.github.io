@@ -22,6 +22,8 @@ jobs:
     - name: Setup Hexo env
       run: |
         # install dependencies
+        git config --global user.email "308232015@qq.com"
+        git config --global user.name "guoaihua"
         npm i -g hexo-cli # 安装hexo
         npm i
   
