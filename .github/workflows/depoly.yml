@@ -27,6 +27,8 @@ jobs:
         mkdir -p ~/.ssh/
         echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa # 配置秘钥
         chmod 600 ~/.ssh/id_rsa
+        git config --global user.name 'ziming' # 换成你自己的邮箱和名字
+        git config --global user.email 'guoaihua@geetest.com'
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         # install dependencies
         npm i -g hexo-cli # 安装hexo
@@ -38,8 +40,6 @@ jobs:
         hexo clean && hexo generate # 执行部署程序
     - name: Commit
       run: |
-        git config --global user.email "guoaihua@geetest.com"
-        git config --global user.name "ziming"
         git commit -am "feat: rebuild docs"
         git push origin HEAD:master
 
