@@ -34,5 +34,6 @@ jobs:
     - name: Commit
       run: |
         git commit -am "feat: rebuild docs"
-        git push
+        git push origin master
+
 
