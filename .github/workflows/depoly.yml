@@ -1,8 +1,9 @@
 name: Deploy Blog
 
-on:   
- tags:
-    - 'v*'
+on:  
+ push:
+    tags:
+      - 'v*'
 
 jobs:
   build: # 一项叫做build的任务
