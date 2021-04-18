@@ -22,8 +22,6 @@ jobs:
     - name: Setup Hexo env
       run: |
         # install dependencies
-        git config --global user.email "308232015@qq.com"
-        git config --global user.name "guoaihua"
         npm i -g hexo-cli # 安装hexo
         npm i
   
@@ -33,6 +31,8 @@ jobs:
         hexo clean && hexo generate # 执行部署程序
     - name: Commit
       run: |
+        git config --global user.email "guoaihua@geetest.com"
+        git config --global user.name "ziming"
         git commit -am "feat: rebuild docs"
         git push origin HEAD:master
 
