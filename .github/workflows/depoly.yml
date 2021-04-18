@@ -20,10 +20,10 @@ jobs:
         node-version: "10.x"
     
     - name: Setup Hexo env
-        env:
+      env:
         ACTION_DEPLOY_KEY: ${{ secrets.BLOGKEY }}
       run: |
-              # set up private key for deploy
+        # set up private key for deploy
         mkdir -p ~/.ssh/
         echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa # 配置秘钥
         chmod 600 ~/.ssh/id_rsa
