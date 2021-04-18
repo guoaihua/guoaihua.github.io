@@ -1,0 +1,30 @@
+name: Deploy Blog
+
+on: [tag] # 当有新tag时运行
+
+jobs:
+  build: # 一项叫做build的任务
+
+    runs-on: ubuntu-latest # 在最新版的Ubuntu系统下运行
+    
+    steps:
+    - name: Checkout # 将仓库内master分支的内容下载到工作目录
+      uses: actions/checkout@v1 # 脚本来自 https://github.com/actions/checkout
+      
+    - name: Use Node.js 10.x # 配置Node环境
+      uses: actions/setup-node@v1 # 配置脚本来自 https://github.com/actions/setup-node
+      with:
+        node-version: "10.x"
+    
+    - name: Setup Hexo env
+      env:
+        ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
+      run: |
+        # install dependencies
+        npm i -g hexo-cli # 安装hexo
+        npm i
+  
+    - name: Deploy
+      run: |
+        # publish
+        hexo clean && hexo generate # 执行部署程序
