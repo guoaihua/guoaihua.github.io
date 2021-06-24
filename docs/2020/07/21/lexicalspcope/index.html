@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      703 字
+      867 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      12
        分钟
     </span>
   
@@ -246,6 +246,62 @@
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>1.变量的查找流程？<br>2.理解词法作用域、作用域链、闭包<br>3.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> bar = &#123;<br>    myName:<span class="hljs-string">&quot;time.geekbang.com&quot;</span>,<br>    printName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(myName)<br>    &#125;    <br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> myName = <span class="hljs-string">&quot; 极客时间 &quot;</span><br>    <span class="hljs-keyword">return</span> bar.printName<br>&#125;<br><span class="hljs-keyword">let</span> myName = <span class="hljs-string">&quot; 极客邦 &quot;</span><br><span class="hljs-keyword">let</span> _printName = foo()<br>_printName()<br>bar.printName()<br></code></pre></td></tr></table></figure>
 
+
+
+<pre><code>function buildLocationTree(nodeList)&#123;
+    var nodes = [];
+    var root = &#123;
+        root: nodes
+    &#125;
+    for(var i = 0; i &lt; nodeList.length; i++)&#123;
+        var ele = nodeList[i];
+        var deep = ele.id;
+
+        if(!deep)&#123;
+            nodes.push(createNode(ele.id,ele.name, ele.subLocations, pid))
+        &#125;else &#123;
+            var target = nodes;
+            while(pid&gt;0)&#123;
+                if(!target.subLocations)&#123;
+                    target.subLocations = [];
+                &#125;
+                pid--;
+                target = target.subLocations
+            &#125;
+            target.push(createNode(ele.id,ele.name, ele.subLocations, pid))
+        &#125;
+    &#125;
+    return root;
+&#125;
+
+function createNode (id, name, subLocations, pid)&#123;
+    return &#123;
+        id,
+        name,
+        subLocations,
+        pid 
+    &#125;
+&#125;</code></pre><p>  function sort(arr){<br>    if(arr.length &lt; 2){<br>      return arr<br>    }</p>
+<pre><code>var arrUnit = arr[5000].timestamp;
+
+var left = [],
+    right = [];
+
+for(var i = 1; i &lt; arr.length; i++)&#123;
+  if( arr[i].timestamp &lt; arrUnit)&#123;
+    left.push(arr[i]);
+  &#125;else &#123;
+    right.push(arr[i]);
+  &#125;
+&#125;    
+
+return sort(left).concat(arrUnit,sort(right))
+&#125;
+
+
+function matchNum(str)&#123;
+        return str.match(/uin=\D*(\d+)/)[1];
+&#125;</code></pre>
             </div>
             <hr>
             <div>

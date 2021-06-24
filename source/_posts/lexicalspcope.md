@@ -111,3 +111,67 @@ let _printName = foo()
 _printName()
 bar.printName()
 ```
+
+
+
+        function buildLocationTree(nodeList){
+            var nodes = [];
+            var root = {
+                root: nodes
+            }
+            for(var i = 0; i < nodeList.length; i++){
+                var ele = nodeList[i];
+                var deep = ele.id;
+
+                if(!deep){
+                    nodes.push(createNode(ele.id,ele.name, ele.subLocations, pid))
+                }else {
+                    var target = nodes;
+                    while(pid>0){
+                        if(!target.subLocations){
+                            target.subLocations = [];
+                        }
+                        pid--;
+                        target = target.subLocations
+                    }
+                    target.push(createNode(ele.id,ele.name, ele.subLocations, pid))
+                }
+            }
+            return root;
+        }
+
+        function createNode (id, name, subLocations, pid){
+            return {
+                id,
+                name,
+                subLocations,
+                pid 
+            }
+        }
+
+ 
+  function sort(arr){
+    if(arr.length < 2){
+      return arr
+    }
+    
+    var arrUnit = arr[5000].timestamp;
+    
+    var left = [],
+        right = [];
+    
+    for(var i = 1; i < arr.length; i++){
+      if( arr[i].timestamp < arrUnit){
+        left.push(arr[i]);
+      }else {
+        right.push(arr[i]);
+      }
+    }    
+    
+    return sort(left).concat(arrUnit,sort(right))
+    }
+
+
+    function matchNum(str){
+            return str.match(/uin=\D*(\d+)/)[1];
+    }
