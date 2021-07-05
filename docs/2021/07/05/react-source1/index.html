@@ -18,7 +18,7 @@
   <meta name="author" content="ziming">
   <meta name="keywords" content="">
   
-  <title>store of data - ziming blogs</title>
+  <title>react-jsx - ziming blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="store of data">
+            <span class="h2" id="subtitle" title="react-jsx">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-07-23 21:47" pubdate>
-        2020年7月23日 晚上
+      <time datetime="2021-07-05 23:05" pubdate>
+        2021年7月5日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      622 字
+      578 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      8
        分钟
     </span>
   
@@ -225,20 +225,22 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">store of data</h1>
+            <h1 style="display: none">react-jsx</h1>
             
             <div class="markdown-body">
-              <h3 id="栈内存与堆内存如何存储数据"><a href="#栈内存与堆内存如何存储数据" class="headerlink" title="栈内存与堆内存如何存储数据"></a>栈内存与堆内存如何存储数据</h3><p>值类型的数据通常保存在栈中，栈空间用来保存执行上下文<br>引用类型的数据通常保存在堆中，并且在栈中留下引用</p>
-<p>栈空间需要用来维护程序执行期间执行上下文的状态，为了提高执行上下文的切换效率，栈的空间一定要相对来说较小</p>
-<h3 id="闭包的内存模型"><a href="#闭包的内存模型" class="headerlink" title="闭包的内存模型"></a>闭包的内存模型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&quot; 极客时间 &quot;</span><br>    <span class="hljs-keyword">let</span> test1 = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">const</span> test2 = <span class="hljs-number">2</span><br>    <span class="hljs-keyword">var</span> innerBar = &#123; <br>        setName:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">newName</span>)</span>&#123;<br>            myName = newName<br>        &#125;,<br>        getName:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-built_in">console</span>.log(test1)<br>            <span class="hljs-keyword">return</span> myName<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> innerBar<br>&#125;<br><span class="hljs-keyword">var</span> bar = foo()<br>bar.setName(<span class="hljs-string">&quot; 极客邦 &quot;</span>)<br>bar.getName()<br><span class="hljs-built_in">console</span>.log(bar.getName())<br></code></pre></td></tr></table></figure>
+              <h3 id="jsx的本质"><a href="#jsx的本质" class="headerlink" title="jsx的本质"></a>jsx的本质</h3><p>| JSX 是 JavaScript 的一种语法扩展，它和模板语言很接近，但是它充分具备 JavaScript 的能力</p>
+<h3 id="jsx-如何编译成js"><a href="#jsx-如何编译成js" class="headerlink" title="jsx 如何编译成js"></a>jsx 如何编译成js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// jsx 语法文件</span><br>&lt;div className=<span class="hljs-string">&#x27;test&#x27;</span>&gt;<br>  &lt;p&gt;<span class="hljs-number">123</span>&lt;/p&gt;  <br>&lt;/div&gt;<br><br><span class="hljs-comment">// babel 转义之后的js文件</span><br>React.createElement(<span class="hljs-string">&quot;div&quot;</span>, &#123;<br>  className: <span class="hljs-string">&quot;test&quot;</span><br>&#125;, React.createElement(<span class="hljs-string">&quot;p&quot;</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">&quot;123&quot;</span>));<br></code></pre></td></tr></table></figure>
+<p>JSX标签都被转化为了React.createElement的调用，JSX 的本质是React.createElement这个 JavaScript 调用的语法糖</p>
+<h3 id="jsx的优点"><a href="#jsx的优点" class="headerlink" title="jsx的优点"></a>jsx的优点</h3><p>jsx精简的语法糖，让我们使用类html标签语法来创建虚拟dom（使用js对象语法描述dom元素），降低了学习成本同时提高了工作效率</p>
+<h3 id="createElement的作用"><a href="#createElement的作用" class="headerlink" title="createElement的作用"></a>createElement的作用</h3><p>开发者通过入参type、config、children调用createElement,创建了一个ReactElement对象，这个对象就是虚拟dom</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//jsx</span><br><br>        <span class="hljs-keyword">const</span> ele = (<br>            &lt;div className=<span class="hljs-string">&quot;test&quot;</span>&gt;<br>                &lt;p&gt;test&lt;/p&gt;    <br>            &lt;/div&gt;<br>        )<br><br><span class="hljs-comment">// 转换过程</span><br><br><span class="hljs-keyword">const</span> ele = React.createElement(<span class="hljs-string">&quot;div&quot;</span>, &#123;<br>  className: <span class="hljs-string">&quot;test&quot;</span><br>&#125;, React.createElement(<span class="hljs-string">&quot;p&quot;</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">&quot;test&quot;</span>));<br><br><br><span class="hljs-comment">// 转换之后的ReactElement对象 ele</span><br>&#123;<br>    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;div&quot;</span>,<br>    <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-literal">null</span>,<br>    <span class="hljs-string">&quot;ref&quot;</span>: <span class="hljs-literal">null</span>,<br>    <span class="hljs-string">&quot;props&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;className&quot;</span>: <span class="hljs-string">&quot;test&quot;</span>,<br>        <span class="hljs-string">&quot;children&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;p&quot;</span>,<br>            <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-literal">null</span>,<br>            <span class="hljs-string">&quot;ref&quot;</span>: <span class="hljs-literal">null</span>,<br>            <span class="hljs-string">&quot;props&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;children&quot;</span>: <span class="hljs-string">&quot;test&quot;</span><br>            &#125;,<br>            <span class="hljs-string">&quot;_owner&quot;</span>: <span class="hljs-literal">null</span><br>        &#125;<br>    &#125;,<br>    <span class="hljs-string">&quot;_owner&quot;</span>: <span class="hljs-literal">null</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-<p>1.首先会创建一个全局执行上下文<br>2.执行到foo函数时，会先进行编译，创建foo函数的执行上下文<br>3.遇到内部函数时，还要对内部函数做一个快速的词法扫描，内部函数引用了外部变量，在堆内存中创建一个closure闭包对象，这个对象会同时包含值与引用2种数据<br>4.这个closure对象保存在变量环境中，由于闭包的特殊性，即使函数执行完毕了，但是返回的对象中的函数依然保留了它的引用</p>
-<p>产生闭包的核心：<br>第一步是需要预扫描内部函数；<br>第二步是把内部函数引用的外部变量保存到堆中</p>
-<p>执行上下文的销毁过程：<br>关于foo函数执行上下文销毁过程：foo函数执行结束之后，当前执行状态的指针下移到栈中的全局执行上下文的位置，foo函数的执行上下文的那块数据就挪出来，这也就是foo函数执行上下文的销毁过程，这个文中有提到，你可以参考“调用栈中切换执行上下文状态“图。</p>
-<p>第二个问题：innerBar返回后，含有setName和getName对象，这两个对象里面包含了堆中的closure(foo)的引用。虽然foo执行上下文销毁了，foo函数中的对closure(foo)的引用也断开了，但是setName和getName里面又重新建立起来了对closure(foo)引用</p>
-<h3 id="执行上下文如何切换"><a href="#执行上下文如何切换" class="headerlink" title="执行上下文如何切换"></a>执行上下文如何切换</h3><p>只需要将指针下移到上个执行上下文的地址就可以了，当前执行上下文栈区空间全部回收，堆中的数据依然保留</p>
-
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.JSX 的本质是什么，它和 JS 之间到底是什么关系？</p>
+<p>本质是js中 React.createElement的语法糖，是一种js语法的拓展。最后通过babel编译成真正的js语法。</p>
+<p>2.为什么要用 JSX？不用会有什么后果？</p>
+<p>jsx使用类html的方式构造虚拟dom，降低学习成本，提高效率</p>
+<p>3.JSX 背后的功能模块是什么，这个功能模块都做了哪些事情？<br>React.createElement 、ReactElement<br>通过createElement 将用户参数传入的数据格式化，最后通过ReactElement创建虚拟dom</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> ReactElement = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type, key, ref, self, source, owner, props</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> element = &#123;<br>    <span class="hljs-comment">// REACT_ELEMENT_TYPE是一个常量，用来标识该对象是一个ReactElement</span><br>    $$typeof: REACT_ELEMENT_TYPE,<br><br>    <span class="hljs-comment">// 内置属性赋值</span><br>    type: type,<br>    key: key,<br>    ref: ref,<br>    props: props,<br><br>    <span class="hljs-comment">// 记录创造该元素的组件</span><br>    _owner: owner,<br>  &#125;;<br><br>  <span class="hljs-comment">// </span><br>  <span class="hljs-keyword">if</span> (__DEV__) &#123;<br>    <span class="hljs-comment">// 这里是一些针对 __DEV__ 环境下的处理，对于大家理解主要逻辑意义不大，此处我直接省略掉，以免混淆视听</span><br>  &#125;<br><br>  <span class="hljs-keyword">return</span> element;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -258,18 +260,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/var/www/html/blog/docs/2020/07/27/garbageCollection/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">garbageCollection</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/var/www/html/blog/docs/2020/07/22/this/">
-                        <span class="hidden-mobile">understand  this & scope chain</span>
+                      <a href="/var/www/html/blog/docs/2020/09/23/designmode-1/">
+                        <span class="hidden-mobile">designmode</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

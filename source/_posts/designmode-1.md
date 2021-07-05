@@ -1,7 +1,7 @@
 ---
 title: designmode
 date: 2020-09-23 23:13:12
-tags:
+tags: 设计模式
 ---
 
 ### 简单工厂模式

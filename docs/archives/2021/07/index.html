@@ -18,25 +18,9 @@
   <meta name="author" content="ziming">
   <meta name="keywords" content="">
   
-  <title>store of data - ziming blogs</title>
+  <title>归档 - ziming blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/var/www/html/blog/docs/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
@@ -64,7 +48,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -163,46 +147,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="store of data">
+            <span class="h2" id="subtitle" title="归档">
               
             </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-07-23 21:47" pubdate>
-        2020年7月23日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      622 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      6
-       分钟
-    </span>
-  
-
-  
-  
-</div>
 
             
           </div>
@@ -215,90 +162,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 10 篇文章</p>
+  <hr>
+  
+  
+    
       
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">store of data</h1>
-            
-            <div class="markdown-body">
-              <h3 id="栈内存与堆内存如何存储数据"><a href="#栈内存与堆内存如何存储数据" class="headerlink" title="栈内存与堆内存如何存储数据"></a>栈内存与堆内存如何存储数据</h3><p>值类型的数据通常保存在栈中，栈空间用来保存执行上下文<br>引用类型的数据通常保存在堆中，并且在栈中留下引用</p>
-<p>栈空间需要用来维护程序执行期间执行上下文的状态，为了提高执行上下文的切换效率，栈的空间一定要相对来说较小</p>
-<h3 id="闭包的内存模型"><a href="#闭包的内存模型" class="headerlink" title="闭包的内存模型"></a>闭包的内存模型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&quot; 极客时间 &quot;</span><br>    <span class="hljs-keyword">let</span> test1 = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">const</span> test2 = <span class="hljs-number">2</span><br>    <span class="hljs-keyword">var</span> innerBar = &#123; <br>        setName:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">newName</span>)</span>&#123;<br>            myName = newName<br>        &#125;,<br>        getName:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-built_in">console</span>.log(test1)<br>            <span class="hljs-keyword">return</span> myName<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> innerBar<br>&#125;<br><span class="hljs-keyword">var</span> bar = foo()<br>bar.setName(<span class="hljs-string">&quot; 极客邦 &quot;</span>)<br>bar.getName()<br><span class="hljs-built_in">console</span>.log(bar.getName())<br></code></pre></td></tr></table></figure>
+      <p class="h5">2021</p>
+    
+    <a href="/var/www/html/blog/docs/2021/07/05/react-source1/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">react-jsx</span>
+      <time style="float: right;">07-05</time>
+    </a>
+  
+</div>
 
 
-<p>1.首先会创建一个全局执行上下文<br>2.执行到foo函数时，会先进行编译，创建foo函数的执行上下文<br>3.遇到内部函数时，还要对内部函数做一个快速的词法扫描，内部函数引用了外部变量，在堆内存中创建一个closure闭包对象，这个对象会同时包含值与引用2种数据<br>4.这个closure对象保存在变量环境中，由于闭包的特殊性，即使函数执行完毕了，但是返回的对象中的函数依然保留了它的引用</p>
-<p>产生闭包的核心：<br>第一步是需要预扫描内部函数；<br>第二步是把内部函数引用的外部变量保存到堆中</p>
-<p>执行上下文的销毁过程：<br>关于foo函数执行上下文销毁过程：foo函数执行结束之后，当前执行状态的指针下移到栈中的全局执行上下文的位置，foo函数的执行上下文的那块数据就挪出来，这也就是foo函数执行上下文的销毁过程，这个文中有提到，你可以参考“调用栈中切换执行上下文状态“图。</p>
-<p>第二个问题：innerBar返回后，含有setName和getName对象，这两个对象里面包含了堆中的closure(foo)的引用。虽然foo执行上下文销毁了，foo函数中的对closure(foo)的引用也断开了，但是setName和getName里面又重新建立起来了对closure(foo)引用</p>
-<h3 id="执行上下文如何切换"><a href="#执行上下文如何切换" class="headerlink" title="执行上下文如何切换"></a>执行上下文如何切换</h3><p>只需要将指针下移到上个执行上下文的地址就可以了，当前执行上下文栈区空间全部回收，堆中的数据依然保留</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
+
+
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/var/www/html/blog/docs/2020/07/27/garbageCollection/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">garbageCollection</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/var/www/html/blog/docs/2020/07/22/this/">
-                        <span class="hidden-mobile">understand  this & scope chain</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -379,15 +276,9 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 

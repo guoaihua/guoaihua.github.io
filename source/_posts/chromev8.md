@@ -1,7 +1,7 @@
 ---
 title: chromev8
 date: 2020-08-08 22:32:57
-tags:
+tags: browser
 ---
 
 ### 编译器

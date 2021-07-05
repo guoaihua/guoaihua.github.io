@@ -18,7 +18,7 @@
   <meta name="author" content="ziming">
   <meta name="keywords" content="">
   
-  <title>store of data - ziming blogs</title>
+  <title>chromev8 - ziming blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="store of data">
+            <span class="h2" id="subtitle" title="chromev8">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-07-23 21:47" pubdate>
-        2020年7月23日 晚上
+      <time datetime="2020-08-08 22:32" pubdate>
+        2020年8月8日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      622 字
+      711 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -225,25 +225,38 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">store of data</h1>
+            <h1 style="display: none">chromev8</h1>
             
             <div class="markdown-body">
-              <h3 id="栈内存与堆内存如何存储数据"><a href="#栈内存与堆内存如何存储数据" class="headerlink" title="栈内存与堆内存如何存储数据"></a>栈内存与堆内存如何存储数据</h3><p>值类型的数据通常保存在栈中，栈空间用来保存执行上下文<br>引用类型的数据通常保存在堆中，并且在栈中留下引用</p>
-<p>栈空间需要用来维护程序执行期间执行上下文的状态，为了提高执行上下文的切换效率，栈的空间一定要相对来说较小</p>
-<h3 id="闭包的内存模型"><a href="#闭包的内存模型" class="headerlink" title="闭包的内存模型"></a>闭包的内存模型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&quot; 极客时间 &quot;</span><br>    <span class="hljs-keyword">let</span> test1 = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">const</span> test2 = <span class="hljs-number">2</span><br>    <span class="hljs-keyword">var</span> innerBar = &#123; <br>        setName:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">newName</span>)</span>&#123;<br>            myName = newName<br>        &#125;,<br>        getName:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-built_in">console</span>.log(test1)<br>            <span class="hljs-keyword">return</span> myName<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> innerBar<br>&#125;<br><span class="hljs-keyword">var</span> bar = foo()<br>bar.setName(<span class="hljs-string">&quot; 极客邦 &quot;</span>)<br>bar.getName()<br><span class="hljs-built_in">console</span>.log(bar.getName())<br></code></pre></td></tr></table></figure>
-
-
-<p>1.首先会创建一个全局执行上下文<br>2.执行到foo函数时，会先进行编译，创建foo函数的执行上下文<br>3.遇到内部函数时，还要对内部函数做一个快速的词法扫描，内部函数引用了外部变量，在堆内存中创建一个closure闭包对象，这个对象会同时包含值与引用2种数据<br>4.这个closure对象保存在变量环境中，由于闭包的特殊性，即使函数执行完毕了，但是返回的对象中的函数依然保留了它的引用</p>
-<p>产生闭包的核心：<br>第一步是需要预扫描内部函数；<br>第二步是把内部函数引用的外部变量保存到堆中</p>
-<p>执行上下文的销毁过程：<br>关于foo函数执行上下文销毁过程：foo函数执行结束之后，当前执行状态的指针下移到栈中的全局执行上下文的位置，foo函数的执行上下文的那块数据就挪出来，这也就是foo函数执行上下文的销毁过程，这个文中有提到，你可以参考“调用栈中切换执行上下文状态“图。</p>
-<p>第二个问题：innerBar返回后，含有setName和getName对象，这两个对象里面包含了堆中的closure(foo)的引用。虽然foo执行上下文销毁了，foo函数中的对closure(foo)的引用也断开了，但是setName和getName里面又重新建立起来了对closure(foo)引用</p>
-<h3 id="执行上下文如何切换"><a href="#执行上下文如何切换" class="headerlink" title="执行上下文如何切换"></a>执行上下文如何切换</h3><p>只需要将指针下移到上个执行上下文的地址就可以了，当前执行上下文栈区空间全部回收，堆中的数据依然保留</p>
+              <h3 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h3><p>编译型语言在程序执行之前需要先经过编译，将其编译为机器可以理解的二进制文件，c/c++ go<br>编译过程：</p>
+<p>源代码——&gt;词法分析、语法分析-&gt;AST-&gt;生成中间代码-&gt;代码优化-&gt;二进制文件-&gt;执行</p>
+<h3 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h3><p>解释型语言需要每次在运行时都对程序进行动态解释再执行</p>
+<p>编译过程：</p>
+<p>源代码——&gt;词法分析、语法分析-&gt;AST-&gt;字节码-&gt;解释执行-&gt;执行</p>
+<h3 id="v8-如何执行一段代码"><a href="#v8-如何执行一段代码" class="headerlink" title="v8 如何执行一段代码"></a>v8 如何执行一段代码</h3><p><img src="/images/v8.png" srcset="/var/www/html/blog/docs/img/loading.gif" lazyload alt=""></p>
+<p>1.生成抽象语法树和执行上下文<br>AST 是一种结构，生成它的步骤：分词（tokenize)，将代码分成最小单元；解析，语法分析，将token 数据转成AST</p>
+<p>2.生成字节码</p>
+<p>一开始v8没有字节码，直接将AST装成机器码，执行效率非常高，但是占用内存大，低端机器扛不住。<br>为了解决内存问题，引入了字节码。</p>
+<p>字节码：介于AST 和 机器之前的一种代码，需要被解释器转成机器码了才能执行</p>
+<p>机器码所占用的空间远远超过了字节码，所以使用字节码可以减少系统的内存使用</p>
+<p>3.执行阶段</p>
+<p>通常，第一次执行的字节码，解释器lgnition和逐条解释。在执行的字节码的过程中，<br>如果发现有热点代码（HotSpot），比如一段代码被重复执行多次，这种就称为热点代码，那么后台的编译器 TurboFan 就会把该段热点的字节码编译为高效的机器码，然后当再次执行这段被优化的代码时，只需要执行编译后的机器码就可以了，这样就大大提升了代码的执行效率</p>
+<h3 id="即时编译-JIT"><a href="#即时编译-JIT" class="headerlink" title="即时编译 JIT"></a>即时编译 JIT</h3><p>字节码 与 解释器、编译器相结合；<br>v8中的解释： 代码每次执行的时候都会进行编译，编译为字节码的时候，解释器需要进行逐条解释，但是如果这段代码被标记为了热点代码，编译器就将它直接编译为了机器代码并保存在内存中，<br>下次会直接使用内存中的机器码，而不需要逐条解释为机器码</p>
+<h3 id="js性能优化"><a href="#js性能优化" class="headerlink" title="js性能优化"></a>js性能优化</h3><p>代码层面的优化，v8已经做到极致了，我们要将重心放在单次脚本的运行时间和网络下载上</p>
+<p>1.单次脚本的执行时间<br>2.避免过大的内联脚本，因为在解析 HTML 的过程中，解析和编译也会占用主线程；<br>3.减少 JavaScript 文件的容量，因为更小的文件会提升下载速度，并且占用更低的内存</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/var/www/html/blog/docs/tags/browser/">browser</a>
+                    
+                  </div>
                 
               </div>
               
@@ -258,9 +271,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/var/www/html/blog/docs/2020/07/27/garbageCollection/">
+                      <a href="/var/www/html/blog/docs/2020/09/10/inherit/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">garbageCollection</span>
+                        <span class="hidden-mobile">inherit</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -268,8 +281,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/var/www/html/blog/docs/2020/07/22/this/">
-                        <span class="hidden-mobile">understand  this & scope chain</span>
+                      <a href="/var/www/html/blog/docs/2020/07/27/garbageCollection/">
+                        <span class="hidden-mobile">garbageCollection</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
