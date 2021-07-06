@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>react-lifecyles</title>
+    <link href="/2021/07/06/react-source2/"/>
+    <url>/2021/07/06/react-source2/</url>
+    
+    <content type="html"><![CDATA[<h3 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h3><p>mount:<br>consructor<br>static getDerivedStateFromProps()<br>render<br>componentDidMount</p><p>update:<br>static getDerivedStateFromProps()<br>shouldComponentUpdate()<br>render()<br>getSnapshotBeforeUpdate()<br>componentDidUpdate()</p><h3 id="render是react组件生命周期的核心"><a href="#render是react组件生命周期的核心" class="headerlink" title="render是react组件生命周期的核心"></a>render是react组件生命周期的核心</h3><p>虚拟 DOM 自然不必多说，它的生成都要仰仗 render；而组件化概念中所提及的“渲染工作流”，这里指的是从组件数据改变到组件实际更新发生的过程，这个过程的实现同样离不开 render</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>react-jsx</title>
     <link href="/2021/07/05/react-source1/"/>
     <url>/2021/07/05/react-source1/</url>
