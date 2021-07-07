@@ -1,6 +1,7 @@
 ---
 title: react-jsx
 date: 2021-07-05 23:05:48
+tags: React
 ---
 
 

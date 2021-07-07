@@ -18,7 +18,7 @@
   <meta name="author" content="ziming">
   <meta name="keywords" content="">
   
-  <title>react-lifecyles - ziming blogs</title>
+  <title>React-components - ziming blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="react-lifecyles">
+            <span class="h2" id="subtitle" title="React-components">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-06 22:14" pubdate>
-        2021年7月6日 晚上
+      <time datetime="2021-07-07 23:06" pubdate>
+        2021年7月7日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      440 字
+      422 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      5
        分钟
     </span>
   
@@ -225,15 +225,14 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">react-lifecyles</h1>
+            <h1 style="display: none">React-components</h1>
             
             <div class="markdown-body">
-              <h3 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h3><p>mount:<br>consructor<br>static getDerivedStateFromProps()<br>render<br>componentDidMount</p>
-<p>update:<br>static getDerivedStateFromProps()<br>shouldComponentUpdate()<br>render()<br>getSnapshotBeforeUpdate()<br>componentDidUpdate()</p>
-<h3 id="render是react组件生命周期的核心"><a href="#render是react组件生命周期的核心" class="headerlink" title="render是react组件生命周期的核心"></a>render是react组件生命周期的核心</h3><p>虚拟 DOM 自然不必多说，它的生成都要仰仗 render；而组件化概念中所提及的“渲染工作流”，这里指的是从组件数据改变到组件实际更新发生的过程，这个过程的实现同样离不开 render</p>
-<p>规则：<br>render() 方法是 class 组件中唯一必须实现的方法<br>当 render 被调用时，它会检查 this.props 和 this.state 的变化并返回以下类型之一：React元素、数组或者fragment、Portals、字符串或者数值类型、布尔类型或 null</p>
-<h3 id="新的生命周期"><a href="#新的生命周期" class="headerlink" title="新的生命周期"></a>新的生命周期</h3><p>16.3版本及以后增加了 getDerivedStateFromProps生命周期，废弃了componentWillMount<br>1.该生命周期主要用来从props派生state，是一个静态方法，不能调用this，使用生命周期时要保证它的纯洁性<br>2.接收2个参数，props和state，它应返回一个对象来更新 state，如果返回 null 则不更新任何内容，可以对state进行增量更新<br>3.任何因素触发的组件更新流程（包括由 this.setState 和 forceUpdate 触发的更新流程）都会触发 getDerivedStateFromProps；而在 v 16.3 版本时，只有父组件的更新会触发该生命周期</p>
-<h3 id="生命周期废旧立新的原因"><a href="#生命周期废旧立新的原因" class="headerlink" title="生命周期废旧立新的原因"></a>生命周期废旧立新的原因</h3><p>为fiber的异步渲染做准备<br>在 Fiber 机制下，render 阶段是允许暂停、终止和重启的。当一个任务执行到一半被打断后，下一次渲染线程抢回主动权时，这个任务被重启的形式是“重复执行一遍整个任务”而非“接着上次执行到的那行代码往下走”</p>
+              <h3 id="组件渲染核心"><a href="#组件渲染核心" class="headerlink" title="组件渲染核心"></a>组件渲染核心</h3><p>数据驱动视图 react的视图是由数据驱动的</p>
+<h3 id="基于-props-的单向数据流"><a href="#基于-props-的单向数据流" class="headerlink" title="基于 props 的单向数据流"></a>基于 props 的单向数据流</h3><p>指的就是当前组件的 state 以 props 的形式流动时，只能流向组件树中比自己层级更低的组件。 比如在父-子组件这种嵌套关系中，只能由父组件传 props 给子组件，而不能反过来。</p>
+<h3 id="组建通信"><a href="#组建通信" class="headerlink" title="组建通信"></a>组建通信</h3><p>使用基于 Props 的单向数据流串联父子、兄弟组件；<br>利用“发布-订阅”模式驱动 React 数据在任意组件间流动。</p>
+<p>父子： 通过props，将父组件的state流向子组件<br>子父： 父组件通过props，将一个绑定了自身上下文的函数传递到子组件，那么子组件在调用该函数时，就可以将想要交给父组件的数据以函数入参的形式给出去，间接改变父组件数据<br>兄弟： 同一个父组件，将兄弟1-&gt;兄弟2的通信转换为 兄弟1-&gt;父组件 父组件-&gt;兄弟2，兄弟1借用父元素函数改变父元素state，然后父元素通过props将state流向兄弟2<br>复杂组件间：通过发布订阅模式，解耦合</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">EventEmitter</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">this</span>.callback = &#123;&#125;;<br>&#125;<br><br>EventEmitter.prototype = &#123;<br>    <span class="hljs-function"><span class="hljs-title">on</span>(<span class="hljs-params">type, callback</span>)</span>&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> callback !== <span class="hljs-string">&#x27;function&#x27;</span>)&#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(!<span class="hljs-built_in">this</span>.callback[type])&#123;<br>            <span class="hljs-built_in">this</span>.callback[type] = [];<br>        &#125;<br>        <span class="hljs-built_in">this</span>.callback[type].push(callback);<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">emit</span>(<span class="hljs-params">type, data</span>)</span>&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.callback[type])&#123;<br>            <span class="hljs-built_in">this</span>.callback[type].forEach(<span class="hljs-function"><span class="hljs-params">element</span> =&gt;</span> &#123;<br>                element.call(<span class="hljs-built_in">this</span>, data)<br>            &#125;);<br>        &#125;<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">off</span>(<span class="hljs-params">type, cb</span>)</span>&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.callback[type])&#123;<br>            <span class="hljs-keyword">const</span> len = <span class="hljs-built_in">this</span>.callback[type].length - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = len; i &gt;=<span class="hljs-number">0</span>; i--)&#123;<br>                <span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.callback[type][i] === cb)&#123;<br>                    <span class="hljs-built_in">this</span>.callback[type].splice(i,<span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> EventEmitter<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -261,18 +260,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/07/react-components/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">React-components</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/05/react-source1/">
-                        <span class="hidden-mobile">react-jsx</span>
+                      <a href="/2021/07/06/react-source2/">
+                        <span class="hidden-mobile">react-lifecyles</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
