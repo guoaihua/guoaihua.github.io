@@ -18,7 +18,7 @@
   <meta name="author" content="ziming">
   <meta name="keywords" content="">
   
-  <title>React-components - ziming blogs</title>
+  <title>react-hooks - ziming blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="React-components">
+            <span class="h2" id="subtitle" title="react-hooks">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-07 23:06" pubdate>
-        2021年7月7日 晚上
+      <time datetime="2021-07-08 23:39" pubdate>
+        2021年7月8日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      451 字
+      419 字
     </span>
   
 
@@ -225,16 +225,21 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">React-components</h1>
+            <h1 style="display: none">react-hooks</h1>
             
             <div class="markdown-body">
-              <h3 id="组件渲染核心"><a href="#组件渲染核心" class="headerlink" title="组件渲染核心"></a>组件渲染核心</h3><p>数据驱动视图 react的视图是由数据驱动的</p>
-<h3 id="基于-props-的单向数据流"><a href="#基于-props-的单向数据流" class="headerlink" title="基于 props 的单向数据流"></a>基于 props 的单向数据流</h3><p>指的就是当前组件的 state 以 props 的形式流动时，只能流向组件树中比自己层级更低的组件。 比如在父-子组件这种嵌套关系中，只能由父组件传 props 给子组件，而不能反过来。</p>
-<h3 id="组建通信"><a href="#组建通信" class="headerlink" title="组建通信"></a>组建通信</h3><p>使用基于 Props 的单向数据流串联父子、兄弟组件；<br>利用“发布-订阅”模式驱动 React 数据在任意组件间流动。</p>
-<p>父子： 通过props，将父组件的state流向子组件<br>子父： 父组件通过props，将一个绑定了自身上下文的函数传递到子组件，那么子组件在调用该函数时，就可以将想要交给父组件的数据以函数入参的形式给出去，间接改变父组件数据<br>兄弟： 同一个父组件，将兄弟1-&gt;兄弟2的通信转换为 兄弟1-&gt;父组件 父组件-&gt;兄弟2，兄弟1借用父元素函数改变父元素state，然后父元素通过props将state流向兄弟2<br>复杂组件间：通过发布订阅模式，解耦合</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">EventEmitter</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">this</span>.callback = &#123;&#125;;<br>&#125;<br><br>EventEmitter.prototype = &#123;<br>    <span class="hljs-function"><span class="hljs-title">on</span>(<span class="hljs-params">type, callback</span>)</span>&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> callback !== <span class="hljs-string">&#x27;function&#x27;</span>)&#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(!<span class="hljs-built_in">this</span>.callback[type])&#123;<br>            <span class="hljs-built_in">this</span>.callback[type] = [];<br>        &#125;<br>        <span class="hljs-built_in">this</span>.callback[type].push(callback);<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">emit</span>(<span class="hljs-params">type, data</span>)</span>&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.callback[type])&#123;<br>            <span class="hljs-built_in">this</span>.callback[type].forEach(<span class="hljs-function"><span class="hljs-params">element</span> =&gt;</span> &#123;<br>                element.call(<span class="hljs-built_in">this</span>, data)<br>            &#125;);<br>        &#125;<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">off</span>(<span class="hljs-params">type, cb</span>)</span>&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.callback[type])&#123;<br>            <span class="hljs-keyword">const</span> len = <span class="hljs-built_in">this</span>.callback[type].length - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = len; i &gt;=<span class="hljs-number">0</span>; i--)&#123;<br>                <span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.callback[type][i] === cb)&#123;<br>                    <span class="hljs-built_in">this</span>.callback[type].splice(i,<span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> EventEmitter<br></code></pre></td></tr></table></figure>
+              <h3 id="类组件"><a href="#类组件" class="headerlink" title="类组件"></a>类组件</h3><p>所谓类组件，就是基于 ES6 Class 这种写法，通过继承 React.Component 得来的 React 组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sub</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">props</span>)</span>&#123;<br>        <span class="hljs-built_in">super</span>(props);<br>        <span class="hljs-built_in">this</span>.state = &#123;&#125;<br>    &#125;<br><br>    <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">getDerivedStateFromProps</span>(<span class="hljs-params">props, state</span>)</span> &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;sub&#x27;</span>, props);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>      &#125;<br><br>    <span class="hljs-function"><span class="hljs-title">emit</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-built_in">window</span>.bus.emit(<span class="hljs-string">&#x27;msg&#x27;</span>, <span class="hljs-string">&#x27;dadada&#x27;</span>);<br>    &#125;  <br><br>    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <br>        <span class="hljs-keyword">return</span> (<br>            &lt;div&gt;<br>                &lt;button onClick=&#123;<span class="hljs-built_in">this</span>.emit&#125;&gt;子组件&lt;/button&gt;<br>                &#123;<span class="hljs-built_in">this</span>.props.time&#125;<br>            &lt;/div&gt;<br>        )<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h3><p>严格遵循单一数据流<br>在 Redux 的整个工作过程中，数据流是严格单向的<br><img src="/images/reducer.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="何谓函数组件-无状态组件（Function-Component-Stateless-Component）"><a href="#何谓函数组件-无状态组件（Function-Component-Stateless-Component）" class="headerlink" title="何谓函数组件/无状态组件（Function Component/Stateless Component）"></a>何谓函数组件/无状态组件（Function Component/Stateless Component）</h3><p>函数组件顾名思义，就是以函数的形态存在的 React 组件.早期并没有 React-Hooks 的加持，函数组件内部无法定义和维护 state，因此它还有一个别名叫“无状态组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React, &#123;useState, useEffect&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Increase</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">let</span> [count, setCount] = useState(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">const</span> change = <span class="hljs-function">()=&gt;</span>&#123;<br>        setCount(count++)<br>    &#125;<br>    useEffect(<span class="hljs-function">()=&gt;</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;effect&#x27;</span>);<br>    &#125;)<br>    <span class="hljs-keyword">return</span> (<br>        &lt;div onClick=&#123;change&#125;&gt;<br>            adad  test hooks<br>            &#123;count&#125;<br>        &lt;/div&gt;<br>    )<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Increase<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="Why-React-Hooks"><a href="#Why-React-Hooks" class="headerlink" title="Why React-Hooks"></a>Why React-Hooks</h3><p>1.告别难以理解的class<br>this的指向较复杂，经常不符合预期。生命周期需要学习成本</p>
+<p>2.解决业务逻辑难以拆分的问题<br>业务逻辑通常被打散到各个生命周期，难以维护<br>而hooks可以帮助实现业务逻辑的聚合，避免复杂的组件和冗杂的代码</p>
+<p>3.使状态逻辑复用更加简单<br>过去我们复用状态逻辑，靠的是 HOC（高阶组件）和 Render Props 这些组件设计模式</p>
+<p>4.函数组件更加契合 React 框架的设计理念</p>
+<h3 id="差别"><a href="#差别" class="headerlink" title="差别"></a>差别</h3><p>函数组件会捕获 render 内部的状态，这是两类组件最大的不同</p>
 
             </div>
             <hr>
@@ -262,18 +267,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/08/react-hooks/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">react-hooks</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/06/react-source2/">
-                        <span class="hidden-mobile">react-lifecyles</span>
+                      <a href="/2021/07/07/react-components/">
+                        <span class="hidden-mobile">React-components</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

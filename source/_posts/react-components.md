@@ -56,3 +56,8 @@ EventEmitter.prototype = {
 
 export default EventEmitter
 ```
+
+### redux
+严格遵循单一数据流
+在 Redux 的整个工作过程中，数据流是严格单向的
+![](/images/reducer.png)
