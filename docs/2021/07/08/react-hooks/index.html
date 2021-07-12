@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      419 字
+      514 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      6
        分钟
     </span>
   
@@ -240,6 +240,8 @@
 <p>3.使状态逻辑复用更加简单<br>过去我们复用状态逻辑，靠的是 HOC（高阶组件）和 Render Props 这些组件设计模式</p>
 <p>4.函数组件更加契合 React 框架的设计理念</p>
 <h3 id="差别"><a href="#差别" class="headerlink" title="差别"></a>差别</h3><p>函数组件会捕获 render 内部的状态，这是两类组件最大的不同</p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>底层通过链表来更新内容<br>hooks 的渲染是通过“依次遍历”来定位每个 hooks 内容的。如果前后两次读到的链表在顺序上出现差异，那么渲染的结果自然是不可控的<br>原则：<br>只在 React 函数中调用 Hook；</p>
+<p>不要在循环、条件或嵌套函数中调用 Hook</p>
 
             </div>
             <hr>
@@ -266,6 +268,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/07/12/react-reconciliation/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">react-reconciliation</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
