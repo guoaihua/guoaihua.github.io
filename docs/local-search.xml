@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>react-fiber</title>
+    <link href="/2021/07/13/react-fiber/"/>
+    <url>/2021/07/13/react-fiber/</url>
+    
+    <content type="html"><![CDATA[<h3 id="Stack-Reconciler面临的问题"><a href="#Stack-Reconciler面临的问题" class="headerlink" title="Stack Reconciler面临的问题"></a>Stack Reconciler面临的问题</h3><p>开始渲染时，Stack Reconciler 是一个同步的递归过程。该架构下的diff算法是一个树的深度优先遍历，树复杂的情况下会占用过多的主线程时间</p><h3 id="fiber架构"><a href="#fiber架构" class="headerlink" title="fiber架构"></a>fiber架构</h3><p>增量渲染，将渲染任务分片，使任务可中断、可回复与优先级<br>16之前，react更新流程：<br>Reconciler -&gt; render</p><p>16之后<br>Scheduler -&gt; Reconciler -&gt; render</p><h3 id="fiber架构下的render"><a href="#fiber架构下的render" class="headerlink" title="fiber架构下的render"></a>fiber架构下的render</h3><p>render调用栈的三个阶段：<br>1.初始化<br>2.render阶段<br>3.commit阶段</p><h3 id="三个启动模式"><a href="#三个启动模式" class="headerlink" title="三个启动模式"></a>三个启动模式</h3><p>legacy模式：原本的同步渲染机制<br>blocking模式：目前正在实验中，作为迁移到 concurrent 模式的第一个步骤<br>concurrent模式：异步渲染模式</p><p>fiber架构同时兼容了异步渲染和同步渲染</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>React</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>react-setState</title>
     <link href="/2021/07/12/react-setState/"/>
     <url>/2021/07/12/react-setState/</url>
