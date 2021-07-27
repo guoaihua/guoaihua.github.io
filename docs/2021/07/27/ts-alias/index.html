@@ -18,7 +18,7 @@
   <meta name="author" content="ziming">
   <meta name="keywords" content="">
   
-  <title>react-fiber - ziming blogs</title>
+  <title>ts-alias - ziming blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="react-fiber">
+            <span class="h2" id="subtitle" title="ts-alias">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-13 22:38" pubdate>
-        2021年7月13日 晚上
+      <time datetime="2021-07-27 14:22" pubdate>
+        2021年7月27日 下午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      218 字
+      286 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      4
        分钟
     </span>
   
@@ -225,17 +225,23 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">react-fiber</h1>
+            <h1 style="display: none">ts-alias</h1>
             
             <div class="markdown-body">
-              <h3 id="Stack-Reconciler面临的问题"><a href="#Stack-Reconciler面临的问题" class="headerlink" title="Stack Reconciler面临的问题"></a>Stack Reconciler面临的问题</h3><p>开始渲染时，Stack Reconciler 是一个同步的递归过程。该架构下的diff算法是一个树的深度优先遍历，树复杂的情况下会占用过多的主线程时间</p>
-<h3 id="fiber架构"><a href="#fiber架构" class="headerlink" title="fiber架构"></a>fiber架构</h3><p>增量渲染，将渲染任务分片，使任务可中断、可回复与优先级<br>16之前，react更新流程：<br>Reconciler -&gt; render</p>
-<p>16之后<br>Scheduler -&gt; Reconciler -&gt; render</p>
-<h3 id="fiber架构下的render"><a href="#fiber架构下的render" class="headerlink" title="fiber架构下的render"></a>fiber架构下的render</h3><p>render调用栈的三个阶段：<br>1.初始化<br>2.render阶段<br>3.commit阶段</p>
-<h3 id="三个启动模式"><a href="#三个启动模式" class="headerlink" title="三个启动模式"></a>三个启动模式</h3><p>legacy模式：原本的同步渲染机制<br>blocking模式：目前正在实验中，作为迁移到 concurrent 模式的第一个步骤<br>concurrent模式：异步渲染模式</p>
-<p>fiber架构同时兼容了异步渲染和同步渲染</p>
-<p>文档资料参考：<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/concurrent-mode-adoption.html#why-so-many-modes">https://zh-hans.reactjs.org/docs/concurrent-mode-adoption.html#why-so-many-modes</a></p>
+              <h3 id="使用create-react-app-创建带有ts的模板"><a href="#使用create-react-app-创建带有ts的模板" class="headerlink" title="使用create-react-app 创建带有ts的模板"></a>使用create-react-app 创建带有ts的模板</h3><p>yarn create react-app my-app –template typescript</p>
+<h3 id="覆盖ts配置并配置别名"><a href="#覆盖ts配置并配置别名" class="headerlink" title="覆盖ts配置并配置别名"></a>覆盖ts配置并配置别名</h3><p>cra创建的模板每次启动时会自动覆盖一部分配置，所以需要自己通过extends将需要的部分重写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// tsconfig.json</span><br>  <span class="hljs-string">&quot;extends&quot;</span>: <span class="hljs-string">&quot;./tsconfig.base.json&quot;</span>,<br><br><span class="hljs-comment">// tsconfig.base.json</span><br>&#123;<br>    <span class="hljs-string">&quot;compilerOptions&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;baseUrl&quot;</span>: <span class="hljs-string">&quot;src&quot;</span>,<br>        <span class="hljs-string">&quot;paths&quot;</span>: &#123;<br>          <span class="hljs-string">&quot;@/*&quot;</span>: [<span class="hljs-string">&quot;*&quot;</span>]<br>        &#125;<br>      &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<h3 id="覆盖cra配置"><a href="#覆盖cra配置" class="headerlink" title="覆盖cra配置"></a>覆盖cra配置</h3><p>此时，ts编译时的别名已经生效，但是打包阶段webpack的路径依然会报错。<br>1.通过安装 customize-cra<br>This project relies on react-app-rewired. You’ll need to install that in order for customize-cra to work.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/arackaf/customize-cra">customize-cra</a><br><a target="_blank" rel="noopener" href="https://github.com/timarney/react-app-rewired/blob/master/README_zh.md">react-app-rewired</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">yarn add customize-cra react-app-rewired --dev<br></code></pre></td></tr></table></figure>
+
+<p>2.替换脚本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">-   <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;react-scripts start&quot;</span>,<br>+   <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;react-app-rewired start&quot;</span>,<br>-   <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;react-scripts build&quot;</span>,<br>+   <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;react-app-rewired build&quot;</span>,<br>-   <span class="hljs-string">&quot;test&quot;</span>: <span class="hljs-string">&quot;react-scripts test --env=jsdom&quot;</span>,<br>+   <span class="hljs-string">&quot;test&quot;</span>: <span class="hljs-string">&quot;react-app-rewired test --env=jsdom&quot;</span>,<br></code></pre></td></tr></table></figure>
+
+
+<p>3.添加需要覆盖的配置，重写webpack打包时的别名</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; override, addWebpackAlias, addDecoratorsLegacy &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;customize-cra&#x27;</span>);<br><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><br><span class="hljs-built_in">module</span>.exports = override(<br>  addWebpackAlias(&#123;<br>    <span class="hljs-string">&quot;@&quot;</span>: path.resolve(__dirname, <span class="hljs-string">&#x27;src&#x27;</span>)<br>  &#125;),<br>  addDecoratorsLegacy(), <br>);<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -245,7 +251,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
                     
                   </div>
                 
@@ -262,18 +268,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/27/workflows/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">workflows</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/12/react-setState/">
-                        <span class="hidden-mobile">react-setState</span>
+                      <a href="/2021/07/27/workflows/">
+                        <span class="hidden-mobile">workflows</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

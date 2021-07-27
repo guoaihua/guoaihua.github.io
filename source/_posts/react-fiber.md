@@ -29,3 +29,7 @@ blocking模式：目前正在实验中，作为迁移到 concurrent 模式的第
 concurrent模式：异步渲染模式
 
 fiber架构同时兼容了异步渲染和同步渲染
+
+
+文档资料参考：https://zh-hans.reactjs.org/docs/concurrent-mode-adoption.html#why-so-many-modes
+
