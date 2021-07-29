@@ -4,6 +4,10 @@ date: 2021-07-27 12:54:14
 tags: tools
 ---
 
+### 工具的用法随着版本会发生变化
+
+安装最新版本时，实际用法请参考官方文档
+
 ### prettier-格式化代码
 
 1.安装 [prettier](https://prettier.io/docs/en/install.html)
@@ -46,8 +50,27 @@ eslint-config-prettier 解决冲突
   ],
 ```
 
+### commitizen
+
+[commit](https://github.com/commitizen/cz-cli) 生成管理工具
+
+安装
+
+```javascript
+npm install -g commitizen
+```
+
+使用不同的适配器
+
+```
+commitizen init cz-conventional-changelog --yarn --dev --exact
+```
+
+使用 git-cz/cz/npx cz 完成 commit 提交
+
 ### commit-lint
 
+约束 commit 生成格式
 安装 [commit-lint](https://github.com/conventional-changelog/commitlint/#what-is-commitlint)
 
 同时配置 commit-style 为 [config-angular](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-angular)
@@ -60,4 +83,24 @@ eslint-config-prettier 解决冲突
 
 ```javascript
 conventional-changelog -p angular -i CHANGELOG.md -s
+```
+
+### Standard Version
+
+发布版本时，
+自动生成 changlog
+提升 verion
+生成新的 tag
+
+安装 [Standard Version](https://github.com/conventional-changelog/standard-version)
+
+```
+npm i --save-dev standard-version
+
+{
+  "scripts": {
+    "release": "standard-version"
+  }
+}
+
 ```

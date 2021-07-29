@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      183 字
+      307 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      4
        分钟
     </span>
   
@@ -228,7 +228,8 @@
             <h1 style="display: none">workflows</h1>
             
             <div class="markdown-body">
-              <h3 id="prettier-格式化代码"><a href="#prettier-格式化代码" class="headerlink" title="prettier-格式化代码"></a>prettier-格式化代码</h3><p>1.安装 <a target="_blank" rel="noopener" href="https://prettier.io/docs/en/install.html">prettier</a></p>
+              <h3 id="工具的用法随着版本会发生变化"><a href="#工具的用法随着版本会发生变化" class="headerlink" title="工具的用法随着版本会发生变化"></a>工具的用法随着版本会发生变化</h3><p>安装最新版本时，实际用法请参考官方文档</p>
+<h3 id="prettier-格式化代码"><a href="#prettier-格式化代码" class="headerlink" title="prettier-格式化代码"></a>prettier-格式化代码</h3><p>1.安装 <a target="_blank" rel="noopener" href="https://prettier.io/docs/en/install.html">prettier</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">yarn add --dev --exact prettier<br></code></pre></td></tr></table></figure>
 
 <p>2.vscode 安装插件 Prettier - Code formatter</p>
@@ -244,11 +245,23 @@
 <p>eslint-config-prettier 解决冲突</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">extends</span>: [<br>  <span class="hljs-string">&#x27;plugin:react/recommended&#x27;</span>,<br>  <span class="hljs-string">&#x27;airbnb&#x27;</span>,<br>  <span class="hljs-string">&#x27;prettier&#x27;</span>,<br>],<br></code></pre></td></tr></table></figure>
 
-<h3 id="commit-lint"><a href="#commit-lint" class="headerlink" title="commit-lint"></a>commit-lint</h3><p>安装 <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/commitlint/#what-is-commitlint">commit-lint</a></p>
+<h3 id="commitizen"><a href="#commitizen" class="headerlink" title="commitizen"></a>commitizen</h3><p><a target="_blank" rel="noopener" href="https://github.com/commitizen/cz-cli">commit</a> 生成管理工具</p>
+<p>安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">npm install -g commitizen<br></code></pre></td></tr></table></figure>
+
+<p>使用不同的适配器</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">commitizen</span> <span class="hljs-comment">init</span> <span class="hljs-comment">cz</span><span class="hljs-literal">-</span><span class="hljs-comment">conventional</span><span class="hljs-literal">-</span><span class="hljs-comment">changelog</span> --<span class="hljs-comment">yarn</span> --<span class="hljs-comment">dev</span> --<span class="hljs-comment">exact</span><br></code></pre></td></tr></table></figure>
+
+<p>使用 git-cz/cz/npx cz 完成 commit 提交</p>
+<h3 id="commit-lint"><a href="#commit-lint" class="headerlink" title="commit-lint"></a>commit-lint</h3><p>约束 commit 生成格式<br>安装 <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/commitlint/#what-is-commitlint">commit-lint</a></p>
 <p>同时配置 commit-style 为 <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-angular">config-angular</a></p>
 <h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><p>安装 <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli#readme">conventional-changelog-cli</a></p>
 <p>运行命令生成 changlog</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">conventional-changelog -p angular -i CHANGELOG.md -s<br></code></pre></td></tr></table></figure>
+
+<h3 id="Standard-Version"><a href="#Standard-Version" class="headerlink" title="Standard Version"></a>Standard Version</h3><p>发布版本时，<br>自动生成 changlog<br>提升 verion<br>生成新的 tag</p>
+<p>安装 <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/standard-version">Standard Version</a></p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs q">npm i --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span> standard-version<br><br>&#123;<br>  <span class="hljs-string">&quot;scripts&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;release&quot;</span>: <span class="hljs-string">&quot;standard-version&quot;</span><br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
