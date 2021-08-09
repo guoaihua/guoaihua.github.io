@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>ts-types</title>
+    <link href="/2021/08/09/ts-types/"/>
+    <url>/2021/08/09/ts-types/</url>
+    
+    <content type="html"><![CDATA[<h3 id="索引类型-index-types"><a href="#索引类型-index-types" class="headerlink" title="索引类型 index types"></a>索引类型 index types</h3><p>索引类型查询: keyof T</p><p>keyof T 的结果为T上已知的公共属性名的联合</p><p>下面 keyof T 的结果为 ‘name’ | ‘age’</p><p>索引访问操作符: T[K]</p><p>先决条件 K extends keyof T</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pluck</span>&lt;<span class="hljs-title">T</span>, <span class="hljs-title">K</span> <span class="hljs-title">extends</span> <span class="hljs-title">keyof</span> <span class="hljs-title">T</span>&gt;(<span class="hljs-params">o: T, names: K[]</span>): <span class="hljs-title">T</span>[<span class="hljs-title">K</span>][] </span>&#123;<br>    <span class="hljs-keyword">return</span> names.map(<span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> o[n])<br>&#125;<br><span class="hljs-keyword">interface</span> Person &#123;<br>    name: <span class="hljs-built_in">string</span>;<br>    age: <span class="hljs-built_in">number</span>;<br>&#125;<br><span class="hljs-keyword">let</span> person: Person = &#123;<br>    name: <span class="hljs-string">&#x27;Jarid&#x27;</span>,<br>    age: <span class="hljs-number">3</span><br>&#125;;<br><br><br><span class="hljs-keyword">let</span> strings: <span class="hljs-built_in">string</span>[] = pluck(person, [<span class="hljs-string">&#x27;name&#x27;</span>])<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>typescript</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ts-alias</title>
     <link href="/2021/07/27/ts-alias/"/>
     <url>/2021/07/27/ts-alias/</url>
