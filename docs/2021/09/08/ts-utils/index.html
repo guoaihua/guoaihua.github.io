@@ -232,7 +232,7 @@
 <h3 id="实现-Exclude"><a href="#实现-Exclude" class="headerlink" title="实现 Exclude"></a>实现 Exclude</h3><p>从当前类型中排查掉提供的类型（提供的是类型而不是属性名，和 omit 区分开发）<br>这个提供的类型不一定约束为当前目前类型的子类型</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> MyExclude&lt;T, U&gt; = T <span class="hljs-keyword">extends</span> U ? <span class="hljs-built_in">never</span> : T<br><br><span class="hljs-keyword">type</span> newType = MyExclude&lt;<span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>, <span class="hljs-built_in">string</span>&gt; <span class="hljs-comment">// number</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="实现-Exclude-1"><a href="#实现-Exclude-1" class="headerlink" title="实现 Exclude"></a>实现 Exclude</h3><p>与 Exclude 相反，提取一个类型</p>
+<h3 id="实现-Extract"><a href="#实现-Extract" class="headerlink" title="实现 Extract"></a>实现 Extract</h3><p>与 Exclude 相反，提取一个类型</p>
 <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel"><span class="hljs-built_in">type</span> MyExtract&lt;<span class="hljs-built_in">T</span>, U&gt; = <span class="hljs-built_in">T</span> extends U ? <span class="hljs-built_in">T</span> <span class="hljs-symbol">:</span> never;<br></code></pre></td></tr></table></figure>
 
 <h3 id="实现-pick"><a href="#实现-pick" class="headerlink" title="实现 pick"></a>实现 pick</h3><p>通过属性名 从一个接口中提取当前属性和它的类型, 该属性名一定是当前接口的属性之一</p>

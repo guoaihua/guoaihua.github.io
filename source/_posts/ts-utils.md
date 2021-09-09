@@ -20,7 +20,7 @@ https://github.com/type-challenges/type-challenges/blob/master/README.zh-CN.md
  type newType = MyExclude<string | number, string> // number
 ```
 
-### 实现 Exclude
+### 实现 Extract
 
 与 Exclude 相反，提取一个类型
 
