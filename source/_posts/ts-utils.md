@@ -103,6 +103,8 @@ type MyRequired<T> = {
 
 ### 实现 Record
 
+就是遍历第一个参数的每个子类型，然后将值设置为第二参数
+
 ```
 type Record<K extends keyof any, T> = {
   [P in K]: T
@@ -276,7 +278,7 @@ type Result = Unshift<[1, 2], 0> // [0, 1, 2,]
 
 ## 高级类型
 
-### 获取函数返回类型
+### ReturnType 获取函数返回类型
 
 不使用 ReturnType 实现 TypeScript 的 ReturnType<T> 范型。
 infer 推断返回类型
@@ -293,4 +295,156 @@ const fn = (v: boolean) => {
   }
 
   type a = MyReturnType<typeof fn> // 应推导出 "1 | 2"
+```
+
+### ReadyOnly2
+
+实现一个通用 MyReadonly2<T, K>，它带有两种类型的参数 T 和 K。
+
+K 指定应设置为 Readonly 的 T 的属性集。如果未提供 K，则应使所有属性都变为只读，就像普通的 Readonly<T>一样。
+
+例如
+
+```
+interface Todo {
+  title: string
+  description: string
+  completed: boolean
+}
+
+type MyReadonly2<T,K extends keyof T = keyof T> = {
+    readonly [P in K]: T[P]
+} & T  // 默认值使用es6的默认值， 使用新的类型和原有类型交叉，key相同时，readonly会增加
+
+const todo: MyReadonly2<Todo, 'title' | 'description'> = {
+  title: "Hey",
+  description: "foobar",
+  completed: false,
+}
+
+todo.title = "Hello" // Error: cannot reassign a readonly property
+todo.description = "barFoo" // Error: cannot reassign a readonly property
+todo.completed = true // OK
+
+```
+
+### 深度 Readonly
+
+实现一个通用的 DeepReadonly<T>，它将对象的每个参数及其子对象递归地设为只读
+
+```
+type X = {
+  x: {
+    a: 1
+    b: 'hi'
+  }
+  y: 'hey'
+}
+
+type Expected = {
+  readonly x: {
+    readonly a: 1
+    readonly b: 'hi'
+  }
+  readonly y: 'hey'
+}
+
+type DeepReadonly<T> = {
+  readonly [K in keyof T]: T[K] extends object ?  DeepReadonly<T[K]> : T[K]
+} // 对象才能继续深度遍历
+
+type todo = DeepReadonly<X> // should be same as `Expected`
+```
+
+### 元组转集合
+
+实现泛型 TupleToUnion<T>，它覆盖元组的值与其值联合
+
+```
+type Arr = ['1', '2', '3']
+
+type TupleToUnion<T extends unknown[]> = T[number]
+
+type a = TupleToUnion<Arr> // expected to be '1' | '2' | '3'
+
+
+```
+
+### 可串联构造器
+
+在 JavaScript 中我们很常会使用可串联（Chainable/Pipeline）的函数构造一个对象，但在 TypeScript 中，你能合理的给他附上类型吗？
+
+在这个挑战中，你可以使用任意你喜欢的方式实现这个类型 - Interface, Type 或 Class 都行。你需要提供两个函数 option(key, value) 和 get()。在 option 中你需要使用提供的 key 和 value 扩展当前的对象类型，通过 get 获取最终结果。
+
+```
+// Record 使用key和value构建一个新的类型，最后返回一个全新的函数支持递归
+
+interface Chainable<Tdict={}> {
+  option: <Tkey extends string, Tvalue>(key: Tkey, value: Tvalue) => Chainable< Tdict &  Record<Tkey, Tvalue>>,
+  get: ()=> Tdict
+}
+
+declare const config: Chainable
+
+const result = config
+  .option('foo', 123)
+  .option('name', 'type-challenges')
+  .option('bar', { value: 'Hello World' })
+  .get()
+
+// 期望 result 的类型是：
+interface Result {
+  foo: number
+  name: string
+  bar: {
+    value: string
+  }
+}
+
+```
+
+### 最后一个元素
+
+实现一个通用 Last<T>，它接受一个数组 T 并返回其最后一个元素的类型
+
+```
+type arr1 = ['a', 'b', 'c']
+type arr2 = [3, 2, 1]
+
+// 每次把数组分为当前元素和剩余元素，判断剩余元素个数，即可知道当前元素
+type Last<T extends unknown[]> = T extends [infer first, ...(infer Reset)] ? Reset['length'] extends 0 ? first : Last<Reset> : never
+
+type tail1 = Last<arr1> // expected to be 'c'
+type tail2 = Last<arr2> // expected to be 1
+
+```
+
+### 堆栈操作
+
+实现一个通用 Pop<T>，它接受一个数组 T 并返回一个没有最后一个元素的数组
+
+```
+type arr1 = ['a', 'b', 'c', 'd']
+type arr2 = [3, 2, 1]
+
+
+type Pop<T extends unknown[]> =  T extends [...(infer Reset), infer Last] ? Reset :never
+type Shift<T extends unknown[]> =  T extends [infer First, ...(infer Reset)] ? Reset:never
+type Push<T extends unknown[], K> =  T extends unknown[] ? [...T, K] :never
+type Unshift<T extends unknown[], K> =  T extends unknown[] ? [K, ...T] :never
+
+type re1 = Pop<arr1> // expected to be ['a', 'b', 'c']
+type re2 = Pop<arr2> // expected to be [3, 2]
+
+type re3 = Shift<arr1> // expected to be [ 'b', 'c', 'd']
+type re4 = Shift<arr2> // expected to be [ 2,1]
+
+type re5 = Push<arr1, ['d','1231']> // expected to be ['a', 'b', 'c', 'd', ['d','1231']
+type re6 = Push<arr2, 4> // expected to be [3,2,1,4]
+
+
+type re7 = Unshift<arr1, ['d','1231']> // expected to be [['d','1231'], 'a', 'b', 'c', 'd']
+type re8 = Unshift<arr2, 4> // expected to be [4,3,2,1]
+
+
 ```
