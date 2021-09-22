@@ -448,3 +448,94 @@ type re8 = Unshift<arr2, 4> // expected to be [4,3,2,1]
 
 
 ```
+
+### PromiseAll
+
+键入函数 PromiseAll，它接受 PromiseLike 对象数组，返回值应为 Promise<T>，其中 T 是解析的结果数组
+
+```
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise<string>((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+
+// expected to be `Promise<[number, number, string]>`
+
+declare function PromiseAll<T extends any[]>(values: readonly [...T]): Promise<{
+    [K in keyof T]: T[K] extends Promise<infer R> ? R : T[K]
+}>
+const p = PromiseAll([promise1, promise2, promise3] as const)
+```
+
+### Type Lookup
+
+有时，您可能希望根据其属性在并集中查找类型。
+
+在此挑战中，我们想通过在联合 Cat | Dog 中搜索公共 type 字段来获取相应的类型。换句话说，在以下示例中，我们期望 LookUp<Dog | Cat, 'dog'>获得 Dog，LookUp<Dog | Cat, 'cat'>获得 Cat
+
+```
+interface Cat {
+    type: 'cat'
+    breeds: 'Abyssinian' | 'Shorthair' | 'Curl' | 'Bengal'
+  }
+
+  interface Dog {
+    type: 'dog'
+    breeds: 'Hound' | 'Brittany' | 'Bulldog' | 'Boxer'
+    color: 'brown' | 'white' | 'black'
+  }
+
+  // {type: k}表示更宽泛的父类型，而T 表示更具体的子类型
+  type LookUp<T extends { type: any}, K extends T['type']> = T extends {type: K} ? T : never
+
+  type MyDog = LookUp<Cat | Dog, 'dog'> // expected to be `Dog`
+```
+
+### Trim
+
+Implement TrimLeft<T> which takes an exact string type and returns a new string with the whitespace beginning removed.
+
+```
+
+// 模板文字类型
+type TrimLeft<T extends string> = T extends `${' ' | '\n' | '\t'}${infer SS}` ? TrimLeft<SS> : T
+
+type trimed = TrimLeft<'  Hello World  '> // expected to be 'Hello World  '
+```
+
+trim
+
+```
+// type TrimLeft<S extends string> = S extends `${' ' | '\n' | '\t'}${infer SS}`?TrimLeft<SS>:S
+// type TrimRight<S extends string> = S extends `${infer SS}${' ' | '\n' | '\t'}`?TrimRight<SS>:S
+// type Trim<S extends string> = TrimLeft<TrimRight<S>>
+
+type Trim<T extends string> = T extends `${infer SS}${' ' | '\n' | '\t'}` | `${' ' | '\n' | '\t'}${infer SS}` ? Trim<SS> : T
+
+type trimed = Trim<'  Hello World  '> // expected to be 'Hello World'
+
+```
+
+### Capitalize
+
+Implement Capitalize<T> which converts the first letter of a string to uppercase and leave the rest as-is.
+
+```
+// 还是利用模板文字类型, T的类型更具体，而`${infer R}${infer F}`是一个抽象类型作为父类型
+type MyCapitalize<T extends string> = T extends `${infer R}${infer F}` ?  `${Uppercase<R>}${F}` :T
+
+type capitalized = MyCapitalize<'hello world'> // expected to be 'Hello world'
+```
+
+### Replace
+
+Implement Replace<S, From, To> which replace the string From with To once in the given string S
+
+```
+
+type Replace<T extends string, K extends string, P extends string> = K extends ''? T : T extends `${infer F}${K}${infer L}` ? `${F}${P}${L}` : K
+
+type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 'types are awesome!'
+
+```
