@@ -539,3 +539,59 @@ type Replace<T extends string, K extends string, P extends string> = K extends '
 type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 'types are awesome!'
 
 ```
+
+### ReplaceAll
+
+Implement ReplaceAll<S, From, To> which replace the all the substring From with To in the given string S
+
+```
+
+
+//  对任意值，均可表示为`${infer F}${infer T}${infer L}`, 然后对推测值递归处理
+type ReplaceAll<T extends string, K extends string, U extends string> = K extends '' ? T : T extends `${infer F}${infer K}${infer L}` ? `${F}${U}${ReplaceAll<L, K, U>}` : T
+
+type replaced = ReplaceAll<'t y p e s', ' ', ''> // expected to be 'types'
+```
+
+### 追加参数
+
+实现一个范型 AppendArgument<Fn, A>，对于给定的函数类型 Fn，以及一个任意类型 A，返回一个新的函数 G。G 拥有 Fn 的所有参数并在末尾追加类型为 A 的参数
+
+```
+type Fn = (a: number, b: string) => number
+
+// 对参数的参数和返回值都可以使用 infer 推断
+type AppendArgument<T extends (...args: any) => any, K> = T extends (...args: infer P) => infer R ? (...args: [...P, K]) => R : never
+
+type Result = AppendArgument<Fn, boolean>
+// 期望是 (a: number, b: string, x: boolean) => number
+
+```
+
+### Length of String
+
+Compute the length of a string literal, which behaves like String#length.
+
+```
+
+// 字符串先转数组，再取数组的length
+// 字符转数组，使用infer 分割， 递归
+type StringToArray<T extends string> = T extends `${infer F}${infer R}` ? [F, ...StringToArray<R>] : []
+
+type StringLength<S extends string> = StringToArray<S>['length']
+
+type a = StringLength<'12313 qawqe'>  // 11
+
+```
+
+### Flatten
+
+In this challenge, you would need to write a type that takes an array and emitted the flatten array type.
+
+```
+
+type Flatten<T> = T extends [] ? [] : T extends [infer F, ...(infer R)] ? [...Flatten<F>, ...Flatten<R>] : [T]
+
+type flatten = Flatten<[1, 2, [3, 4], [[[5]]]]> // [1, 2, 3, 4, 5]
+
+```
