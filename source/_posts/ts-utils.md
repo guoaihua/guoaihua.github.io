@@ -595,3 +595,76 @@ type Flatten<T> = T extends [] ? [] : T extends [infer F, ...(infer R)] ? [...Fl
 type flatten = Flatten<[1, 2, [3, 4], [[[5]]]]> // [1, 2, 3, 4, 5]
 
 ```
+
+### AppendObject
+
+```
+
+type Test = { id: '1' }
+
+// 合并交叉类型的对象
+type CombineObject<T extends Object> = {
+    [K in keyof T]: T[K]
+}
+type AppendToObject<T extends object, K extends string, P> = CombineObject<T & { [U in K]: P }>
+
+type Result = AppendToObject<Test, 'value', 4> // expected to be { id: '1', value: 4 }
+
+```
+
+### Absolute
+
+```
+
+type Test = -100;
+
+// 最后都是string
+type Absolute<T extends string | number | bigint> = `${T}` extends `${'-'}${infer R}` ? R : `${T}`
+
+type Result = Absolute<Test>; // expected to be "100"
+
+```
+
+### String to union
+
+```
+type Test = '123';
+//  拆分字符串并递归，终止条件为""
+type StringToUnion<T extends string> = T extends "" ? never : T extends `${infer F}${infer L}` ? (F | StringToUnion<L>) : T
+
+type Result = StringToUnion<Test>; // expected to be "1" | "2" | "3"
+
+```
+
+### Merge
+
+```
+type Foo = {
+    a: number;
+    b: string;
+};
+
+type Bar = {
+    b: number;
+    c: boolean;
+};
+// 交叉类型，如果是对象的话，key取的是并集，value取的才是交集
+type Merge<T extends object, K extends object> = {
+    [P in keyof (T & K)]: P extends keyof K ? K[P] : P extends keyof T ? T[P] : never
+}
+
+
+type a = Merge<Foo, Bar>
+
+```
+
+### CamelCase
+
+```
+
+//  Capitalize<Right> extends Right 判断是否为-
+
+type CamelCase<T extends string> = T extends `${infer Left}-${infer Right}` ? Capitalize<Right> extends Right ? `${Left}-${CamelCase<Capitalize<Right>>}` : `${Left}${CamelCase<Capitalize<Right>>}` : T
+
+type a = CamelCase<'foo-bar-baz-a'>
+```
