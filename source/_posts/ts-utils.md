@@ -668,3 +668,39 @@ type CamelCase<T extends string> = T extends `${infer Left}-${infer Right}` ? Ca
 
 type a = CamelCase<'foo-bar-baz-a'>
 ```
+
+### Diff
+
+Get an Object that is the difference between O & O1
+
+```
+type Foo = {
+    name: string
+    age: string
+  }
+  type Bar = {
+    name: string
+    age: string
+    gender: number
+  }
+
+  //  使用交叉类型获得交叉集合
+  type Diff<T, K> = Pick<T & K, Exclude<keyof T, keyof K> | Exclude<keyof K, keyof T>>
+
+  type a = Diff<Foo, Bar>
+```
+
+### AnyOf
+
+Implement Python liked any function in the type system. A type takes the Array and returns true if any element of the Array is true. If the Array is empty, return false.
+
+```
+
+// 所有假值得联合类型
+
+type FalseUnion = false | '' | 0 | Record<string| number, never> |[]
+type AnyOf<T extends any[]> = T extends [infer F, ...(infer Reset)] ? F extends FalseUnion? AnyOf<Reset>: true : false
+
+type Sample1 = AnyOf<[1, "", false, [], {}]>; // expected to be true.
+type Sample2 = AnyOf<[]>; // expected to be false.
+```
