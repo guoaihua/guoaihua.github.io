@@ -1,46 +1,13 @@
-name: Deploy Blog
-
-on:  
- push:
-    tags:
-      - 'v*'
-
+name: Publish Docker
+on: [push]
 jobs:
-  build: # 一项叫做build的任务
-
-    runs-on: ubuntu-latest # 在最新版的Ubuntu系统下运行
-    
+  build:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout # 将仓库内master分支的内容下载到工作目录
-      uses: actions/checkout@v1 # 脚本来自 https://github.com/actions/checkout
-      
-    - name: Use Node.js 10.x # 配置Node环境
-      uses: actions/setup-node@v1 # 配置脚本来自 https://github.com/actions/setup-node
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        node-version: "10.x"
-    
-    - name: Setup Hexo env
-      env:
-        ACTION_DEPLOY_KEY: ${{ secrets.BLOGKEY }}
-      run: |
-        # set up private key for deploy
-        mkdir -p ~/.ssh/
-        echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa # 配置秘钥
-        chmod 600 ~/.ssh/id_rsa
-        git config --global user.name 'ziming' # 换成你自己的邮箱和名字
-        git config --global user.email 'guoaihua@geetest.com'
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        # install dependencies
-        npm i -g hexo-cli # 安装hexo
-        npm i
-  
-    - name: Deploy
-      run: |
-        # publish
-        hexo clean && hexo generate # 执行部署程序
-    - name: Commit
-      run: |
-        git commit -am "feat: rebuild docs"
-        git push origin HEAD:master
-
-
+        name: ziminga/ziming-blog
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
