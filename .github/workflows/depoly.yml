@@ -1,9 +1,9 @@
 name: Publish Docker
-on:    
-  push:
-  # Sequence of patterns matched against refs/tags
-    tags:        
-      - v*
+on: [push]   
+#   push:
+#   # Sequence of patterns matched against refs/tags
+#     tags:        
+#       - v*
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,14 +18,12 @@ jobs:
          env:
            GITHUB_CONTEXT: ${{toJSON(github)}}
          run: echo "${{ github.event.commits[0].id}}"
-       
-#     - uses: actions/checkout@master
-#     - name: Publish to Registry
-#       uses: elgohr/Publish-Docker-Github-Action@master
-#       with:
-#         name: ziminga/ziming-blog
-#         username: ${{ secrets.DOCKER_USERNAME }}
-#         password: ${{ secrets.DOCKER_PASSWORD }}
+       - name: Publish to Registry
+         uses: elgohr/Publish-Docker-Github-Action@master
+         with:
+            name: ziminga/ziming-blog:${{github.event.commits[0].id}}
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
 
 #     - name: executing remote ssh commands using password
 #       uses: appleboy/ssh-action@master
