@@ -10,9 +10,7 @@ jobs:
     steps:
        - uses: actions/checkout@master
        - name: github context
-         env:
-          GITHUB_CONTEXT: ${{github}}
-         run: echo "${{github}}"
+         run: echo "${{ github.ref }}"
        
 #     - uses: actions/checkout@master
 #     - name: Publish to Registry
