@@ -17,7 +17,7 @@ jobs:
         secret_id: ${{ secrets.TENCENT_CLOUD_SECRET_ID }}
         secret_key: ${{ secrets.TENCENT_CLOUD_SECRET_KEY }}
         region: ${{ secrets.TENCENT_PRODUCT_REGION }}
-        commands: help && version
+        commands: help
         output_format: json
     - run: kubectl get pods
         
