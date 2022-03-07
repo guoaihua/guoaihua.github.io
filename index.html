@@ -7,70 +7,38 @@
 <body>
     <script>
 
-var locationList = [ { id: 0, name: "中国" }, { id: 1, pid: 0, name: "广东省" }, { id: 2, pid: 1, name: "深圳市" }, { id: 3, pid: 1, name: "广州市" }]
-        function buildLocationTree(nodeList){
-            var nodes = [];
-            var root = {
-                root: nodes
-            }
-            for(var i = 0; i < nodeList.length; i++){
-                var ele = nodeList[i];
-                var deep = ele.id;
+                let a = "9007199254740991";
+                let b = "1234567899999999999";
+                var bigNumberADD = (a, b) => {
+                    let max = a.toString();
+                    let min = b.toString();
 
-                if(!deep){
-                    nodes.push(createNode(ele.id,ele.name, ele.subLocations, pid))
-                }else {
-                    var target = nodes;
-                    while(pid>0){
-                        if(!target.subLocations){
-                            target.subLocations = [];
-                        }
-                        pid--;
-                        target = target.subLocations
-                    }
-                    target.push(createNode(ele.id,ele.name, ele.subLocations, pid))
+                if (max.length < min.length) {
+                    let temp = max;
+                    max = min;
+                    min = temp;
                 }
+
+                let bit = 0;
+                let sum = '';
+                while (max.length) {
+                    let temp1 = +max.slice(-1);
+                    let temp2 = +min.slice(-1);
+                    sum = (temp1 + temp2 + bit) % 10 + sum;
+                    bit = Math.floor((temp1 + temp2) / 10);
+                    max = max.slice(0, -1);
+                    min = min.slice(0, -1);
+                }
+
+                if (bit) {
+                    sum = 1 + sum
+                }
+
+                return sum
+
             }
-            return root;
-        }
 
-        function createNode (id, name, subLocations, pid){
-            return {
-                id,
-                name,
-                subLocations,
-                pid 
-            }
-        }
-
- 
-  function sort(arr){
-    if(arr.length < 2){
-      return arr
-    }
-    
-    var arrUnit = arr[5000].timestamp;
-    
-    var left = [],
-        right = [];
-    
-    for(var i = 1; i < arr.length; i++){
-      if( arr[i].timestamp < arrUnit){
-        left.push(arr[i]);
-      }else {
-        right.push(arr[i]);
-      }
-    }    
-    
-    return sort(left).concat(arrUnit,sort(right))
-    }
-
-
-    function matchNum(str){
-            return str.match(/uin=\D*(\d+)/)[1];
-    }
-
-
+                            console.log(bigNumberADD(a, b));
     </script>
 </body>
 </html>
