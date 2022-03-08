@@ -1,5 +1,5 @@
 ---
-title: review-types
+title: review-js
 date: 2022-03-07 21:00:18
 tags: 温故而知新
 ---
@@ -64,4 +64,78 @@ export const bigNumberADD = (a: number, b: number) => {
 ```javascript
 let a = '1';
 a.toFixed(); // a在被调用前，进行了装箱操作
+```
+
+# Javascript
+>Javascript 是一门面向对象的语言, 它不仅实现了面向对象的基本特征，而且具有高度的动态性（可以在运行时修改对象的属性)  
+
+>对象的特征：
+
+    具有唯一标识，即使完全相同的两个对象，也并非同一个对象
+    具有状态，同一个对象可以处于不同的状态
+    具有行为，行为可以改变状态
+
+# 事件循环
+微任务总是在当前队列的尾部添加,宏任务则添添加下一个循环
+```javascript
+  setTimeout(()=>console.log("d"), 0)
+    var r = new Promise(function(resolve, reject){
+        resolve()
+    });
+    r.then(() => { 
+        var begin = Date.now();
+        while(Date.now() - begin < 1000);
+        console.log("c1") 
+        setTimeout(()=>console.log("e"), 0)
+        new Promise(function(resolve, reject){
+            resolve()
+        }).then(() => console.log("c2"))
+    });
+    // c1 -> c2 -> d -> e
+```
+
+实现一个红绿灯
+```javascript
+       var light_ele = document.querySelector('.light');
+
+        const setLight = (color) => light_ele.style.backgroundColor = color
+
+        function Light() {
+            this.green = 3;
+            this.yellow = 1;
+            this.red = 2;
+        }
+
+        Light.prototype.run = function () {
+            new Promise((resolve) => {
+                setLight('green');
+                setTimeout(() => {
+                    console.log('green end')
+                    resolve()
+                }
+                    , this.green * 1000)
+            }).then((value) => {
+                return new Promise((resolve) => {
+                    setLight('yellow');
+                    setTimeout(() => {
+                        console.log('yellow end')
+                        resolve()
+                    }, this.yellow * 1000)
+                })
+            }).then(() => {
+                return new Promise((resolve) => {
+                    setLight('red');
+                    setTimeout(() => {
+                        console.log('red end')
+                        resolve()
+                    }, this.red * 2000)
+                })
+            }).then(() => {
+                console.log('green start')
+                this.run()
+            })
+        }
+
+        let a = new Light()
+        a.run();
 ```
