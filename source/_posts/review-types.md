@@ -1,141 +1,94 @@
 ---
-title: review-js
-date: 2022-03-07 21:00:18
-tags: 温故而知新
+title: review-types
+date: 2022-03-11 10:49:51
 ---
 
-# 数字的最大长度
->Javascript Number 类型为IEEE 754 64位双精度浮点格式（64位的二进度数）
 
->整数范围为： [-2^53 - 1, 2^53 -1]
+# 常见类型
+```typescript
+interface TEST {
+    a?: string // 字符
+    b?: number // 数字
+    c?: boolean // 布尔
+    d?: any // 任意
+    e?: (string | number)[] // 数组
+    f?: () => void // 函数签名
+    g?: {} // 对象
+    h?: 'typescript' // 字符串字面量类型
+}
 
->区分 +0 和 -0 的方式，正是检测 1/x 是 Infinity 还是 -Infinity
+```
 
->大数相加
-```javascript
-/**
- * 大数相加
- * 数字范围为 [-2^53-1, 2^53-1]
- * 将数字转化为字符串相加，避免溢出
- */
-export const bigNumberADD = (a: number, b: number) => {
-    // 将数字转化为字符
-    let max = a.toString();
-    let min = b.toString();
-    let f = 0;
-    let sum = '';
+# 类型断言
+>类型只能被断言为一个更为具体或者更抽象的类型，而不是平级
+```typescript
+const x = "hello" as number;
 
-    // 如果a < b ，交换
+Conversion of type 'string' to type 'number' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
 
-    if (max.length < min.length) {
-        let temp = max;
-        max = min;
-        min = temp;
-    }
+// good
+const x = "hello" as {} // as any 
+```
 
-    // 以最大长度的字符开始遍历
-    while (max.length) {
-        // 取出最后一位字符，并转化为数字
-        let temp1 = +max.slice(-1);
-        let temp2 = +min.slice(-1);
+>as const 后缀通常用来讲一个通用属性的类型转换为文字类型
+```typescript
+const req = {url: 'https://www.aad.com', method: 'Get' }
+// req: { url: string, method: string}
 
-        // 尾数 ,新的数字应该放在最前面
-        sum = (temp1 + temp2 + f) % 10 + sum;
+const req = {url: 'https://www.aad.com', method: 'Get' } as const
 
-        // 这里的取整可能会产生小数，要取整；
-        f = Math.floor((temp1 + temp2) / 10);
+// req: { url: 'https://www.aad.com', method: 'Get'} 使用了具体的字面量类型
 
-        // 修改max，min
-        max = max.slice(0, -1);
-        min = min.slice(0, -1);
-    }
 
-    // 处理完时，f还存在，则在前面加一
-    if (f) {
-        sum = 1 + sum
-    }
-    return sum
+```
+
+# 非空断言
+通常当一个值为 undefined | null 时，可能需要去显示排除一下，使用非空断言可以明确排除空值
+```typescript
+function doSomething(x?: string | null) {
+    console.log("Hello, " + x.toUpperCase()); // x 可能为 string | null | undefined
+}
+
+// use !
+function doSomething(x?: string | null) {
+    console.log("Hello, " + x!.toUpperCase()); // 手动排除null和undefined， 但是通常规避空值
+}
+
+// use ?
+function doSomething(x?: string | null) {
+    console.log("Hello, " + x?.toUpperCase()); // 兼容null和undefined
 }
 ```
 
+# 类型缩小
+通常当一个类型非常宽泛时，实际去使用时却要去具体到某一个类型，这时就要缩小类型，防止报错
 
-# 基本类型的装箱
-基本类型在使用时，. 运算符提供了装箱操作
-```javascript
-let a = '1';
-a.toFixed(); // a在被调用前，进行了装箱操作
+> typeof 类型守卫
+```typescript
+function doSomething(x?: string | number | number[]) {
+    if(typeof x === 'object'){
+        console.log(x.push(1)) // 利用typeof将 x 收窄
+    }
+}
 ```
+> 真实性 收窄
 
-# Javascript
->Javascript 是一门面向对象的语言, 它不仅实现了面向对象的基本特征，而且具有高度的动态性（可以在运行时修改对象的属性)  
-
->对象的特征：
-
-    具有唯一标识，即使完全相同的两个对象，也并非同一个对象
-    具有状态，同一个对象可以处于不同的状态
-    具有行为，行为可以改变状态
-
-# 事件循环
-微任务总是在当前队列的尾部添加,宏任务则添添加下一个循环
-```javascript
-  setTimeout(()=>console.log("d"), 0)
-    var r = new Promise(function(resolve, reject){
-        resolve()
-    });
-    r.then(() => { 
-        var begin = Date.now();
-        while(Date.now() - begin < 1000);
-        console.log("c1") 
-        setTimeout(()=>console.log("e"), 0)
-        new Promise(function(resolve, reject){
-            resolve()
-        }).then(() => console.log("c2"))
-    });
-    // c1 -> c2 -> d -> e
+```typescript
+function doSomething(x?: string) {
+    if(x){
+        console.log(x)
+    }
+}
 ```
+> 相等性收窄
 
-实现一个红绿灯
-```javascript
-       var light_ele = document.querySelector('.light');
-
-        const setLight = (color) => light_ele.style.backgroundColor = color
-
-        function Light() {
-            this.green = 3;
-            this.yellow = 1;
-            this.red = 2;
-        }
-
-        Light.prototype.run = function () {
-            new Promise((resolve) => {
-                setLight('green');
-                setTimeout(() => {
-                    console.log('green end')
-                    resolve()
-                }
-                    , this.green * 1000)
-            }).then((value) => {
-                return new Promise((resolve) => {
-                    setLight('yellow');
-                    setTimeout(() => {
-                        console.log('yellow end')
-                        resolve()
-                    }, this.yellow * 1000)
-                })
-            }).then(() => {
-                return new Promise((resolve) => {
-                    setLight('red');
-                    setTimeout(() => {
-                        console.log('red end')
-                        resolve()
-                    }, this.red * 2000)
-                })
-            }).then(() => {
-                console.log('green start')
-                this.run()
-            })
-        }
-
-        let a = new Light()
-        a.run();
+```typescript
+function doSomething(x: string | number, y: string | boolean) {
+    if(x === y){
+        console.log(x.up)
+    }
+}
 ```
+> in 运算符收窄
+
+> instanceof

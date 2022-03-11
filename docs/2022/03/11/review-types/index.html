@@ -18,7 +18,7 @@
   <meta name="author" content="ziming">
   <meta name="keywords" content="">
   
-  <title>ts-types - 学无止境</title>
+  <title>review-types - 学无止境</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ts-types">
+            <span class="h2" id="subtitle" title="review-types">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-09 22:35" pubdate>
-        2021年8月9日 晚上
+      <time datetime="2022-03-11 10:49" pubdate>
+        2022年3月11日 上午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      456 字
+      460 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -225,44 +225,49 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ts-types</h1>
+            <h1 style="display: none">review-types</h1>
             
             <div class="markdown-body">
-              <h3 id="索引类型-index-types"><a href="#索引类型-index-types" class="headerlink" title="索引类型 index types"></a>索引类型 index types</h3><p>索引类型查询: keyof T</p>
-<p>keyof T 的结果为T上已知的公共属性名的联合</p>
-<p>下面 keyof T 的结果为 ‘name’ | ‘age’</p>
-<p>索引访问操作符: T[K]</p>
-<p>先决条件 K extends keyof T</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pluck</span>&lt;<span class="hljs-title">T</span>, <span class="hljs-title">K</span> <span class="hljs-title">extends</span> <span class="hljs-title">keyof</span> <span class="hljs-title">T</span>&gt;(<span class="hljs-params">o: T, names: K[]</span>): <span class="hljs-title">T</span>[<span class="hljs-title">K</span>][] </span>&#123;<br>    <span class="hljs-keyword">return</span> names.map(<span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> o[n])<br>&#125;<br><span class="hljs-keyword">interface</span> Person &#123;<br>    name: <span class="hljs-built_in">string</span>;<br>    age: <span class="hljs-built_in">number</span>;<br>&#125;<br><span class="hljs-keyword">let</span> person: Person = &#123;<br>    name: <span class="hljs-string">&#x27;Jarid&#x27;</span>,<br>    age: <span class="hljs-number">3</span><br>&#125;;<br><br><br><span class="hljs-keyword">let</span> strings: <span class="hljs-built_in">string</span>[] = pluck(person, [<span class="hljs-string">&#x27;name&#x27;</span>])<br></code></pre></td></tr></table></figure>
+              <h1 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h1><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">interface</span> TEST &#123;<br>    a?: <span class="hljs-built_in">string</span> <span class="hljs-comment">// 字符</span><br>    b?: <span class="hljs-built_in">number</span> <span class="hljs-comment">// 数字</span><br>    c?: <span class="hljs-built_in">boolean</span> <span class="hljs-comment">// 布尔</span><br>    d?: <span class="hljs-built_in">any</span> <span class="hljs-comment">// 任意</span><br>    e?: (<span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>)[] <span class="hljs-comment">// 数组</span><br>    f?: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span> <span class="hljs-comment">// 函数签名</span><br>    g?: &#123;&#125; <span class="hljs-comment">// 对象</span><br>    h?: <span class="hljs-string">&#x27;typescript&#x27;</span> <span class="hljs-comment">// 字符串字面量类型</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
 
+<h1 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h1><blockquote>
+<p>类型只能被断言为一个更为具体或者更抽象的类型，而不是平级</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> x = <span class="hljs-string">&quot;hello&quot;</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">number</span>;<br><br>Conversion <span class="hljs-keyword">of</span> <span class="hljs-keyword">type</span> <span class="hljs-string">&#x27;string&#x27;</span> to <span class="hljs-keyword">type</span> <span class="hljs-string">&#x27;number&#x27;</span> may be a mistake because neither <span class="hljs-keyword">type</span> sufficiently overlaps <span class="hljs-keyword">with</span> the other. If <span class="hljs-built_in">this</span> was intentional, convert the expression to <span class="hljs-string">&#x27;unknown&#x27;</span> first.<br><br><span class="hljs-comment">// good</span><br><span class="hljs-keyword">const</span> x = <span class="hljs-string">&quot;hello&quot;</span> <span class="hljs-keyword">as</span> &#123;&#125; <span class="hljs-comment">// as any </span><br></code></pre></td></tr></table></figure>
 
-<h3 id="条件类型"><a href="#条件类型" class="headerlink" title="条件类型"></a>条件类型</h3><p>为类型推断提供分支选项</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><br><span class="hljs-keyword">type</span> diff&lt;T, U&gt; =<br>    T <span class="hljs-keyword">extends</span> U ? <span class="hljs-built_in">never</span> : T<br><br><br><span class="hljs-keyword">type</span> test = diff&lt;<span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span> | <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>&gt; <span class="hljs-comment">// string | number</span><br></code></pre></td></tr></table></figure>
-<p>ts 官方库</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs excel">/**<br> * Exclude from <span class="hljs-built_in">T</span> those types that are assignable to U<br> */<br><span class="hljs-built_in">type</span> Exclude&lt;<span class="hljs-built_in">T</span>, U&gt; = <span class="hljs-built_in">T</span> extends U ? never <span class="hljs-symbol">:</span> <span class="hljs-built_in">T</span>;<br><br>/**<br> * Extract from <span class="hljs-built_in">T</span> those types that are assignable to U<br> */<br><span class="hljs-built_in">type</span> Extract&lt;<span class="hljs-built_in">T</span>, U&gt; = <span class="hljs-built_in">T</span> extends U ? <span class="hljs-built_in">T</span> <span class="hljs-symbol">:</span> never;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>as const 后缀通常用来讲一个通用属性的类型转换为文字类型</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> req = &#123;<span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://www.aad.com&#x27;</span>, <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;Get&#x27;</span> &#125;<br><span class="hljs-comment">// req: &#123; url: string, method: string&#125;</span><br><br><span class="hljs-keyword">const</span> req = &#123;<span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://www.aad.com&#x27;</span>, <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;Get&#x27;</span> &#125; <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span><br><br><span class="hljs-comment">// req: &#123; url: &#x27;https://www.aad.com&#x27;, method: &#x27;Get&#x27;&#125; 使用了具体的字面量类型</span><br><br><br></code></pre></td></tr></table></figure>
 
-<h3 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h3><p>映射类型建立在索引签名的语法之上，用于声明尚未提前声明的属性类型：</p>
-<p>映射类型是一种泛型类型，它使用PropertyKeys的联合（通常通过 a keyof创建）来迭代键以创建类型：</p>
-<p>type OptionsFlags<Type> &#x3D; {<br>  [Property in keyof Type]: boolean;<br>};</p>
-<p>映射修饰符<br>有两个额外的修饰符可以在映射期间应用：readonly和?分别影响可变性和可选性。</p>
-<p>您可以通过添加-或前缀来删除或添加这些修饰符+。如果不添加前缀，则+为默认值</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs elm">/**<br> * <span class="hljs-type">Make</span> all properties <span class="hljs-keyword">in</span> <span class="hljs-type">T</span> readonly<br> */<br><span class="hljs-keyword">type</span> <span class="hljs-type">Readonly</span>&lt;<span class="hljs-type">T</span>&gt; = &#123;<br>    readonly [<span class="hljs-type">P</span> in keyof <span class="hljs-type">T</span>]: <span class="hljs-type">T</span>[<span class="hljs-type">P</span>];<br>&#125;;<br><br>/**<br> * <span class="hljs-type">Make</span> all properties <span class="hljs-keyword">in</span> <span class="hljs-type">T</span> optional<br> */<br><span class="hljs-keyword">type</span> <span class="hljs-type">Partial</span>&lt;<span class="hljs-type">T</span>&gt; = &#123;<br>    [<span class="hljs-type">P</span> in keyof <span class="hljs-type">T</span>]?: <span class="hljs-type">T</span>[<span class="hljs-type">P</span>];<br>&#125;;<br><br><br></code></pre></td></tr></table></figure>
+<h1 id="非空断言"><a href="#非空断言" class="headerlink" title="非空断言"></a>非空断言</h1><p>通常当一个值为 undefined | null 时，可能需要去显示排除一下，使用非空断言可以明确排除空值</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params">x?: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello, &quot;</span> + x.toUpperCase()); <span class="hljs-comment">// x 可能为 string | null | undefined</span><br>&#125;<br><br><span class="hljs-comment">// use !</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params">x?: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello, &quot;</span> + x!.toUpperCase()); <span class="hljs-comment">// 手动排除null和undefined， 但是通常规避空值</span><br>&#125;<br><br><span class="hljs-comment">// use ?</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params">x?: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello, &quot;</span> + x?.toUpperCase()); <span class="hljs-comment">// 兼容null和undefined</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>键重映射</p>
-<p>在 TypeScript 4.1 及更高版本中，您可以使用映射类型中的as子句重新映射映射类型中的键：</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">type</span> <span class="hljs-type">MappedTypeWithNewProperties</span>&lt;<span class="hljs-type">Type</span>&gt; = &#123;<br>    [<span class="hljs-type">Properties</span> in keyof <span class="hljs-type">Type</span> as <span class="hljs-type">NewKeyType</span>]: <span class="hljs-type">Type</span>[<span class="hljs-type">Properties</span>]<br>&#125;<br><br><span class="hljs-keyword">type</span> <span class="hljs-type">RemoveKindField</span>&lt;<span class="hljs-type">Type</span>&gt; = &#123;<br>    [<span class="hljs-type">Property</span> in keyof <span class="hljs-type">Type</span> as <span class="hljs-type">Exclude</span>&lt;<span class="hljs-type">Property</span>, &quot;kind&quot;&gt;]: <span class="hljs-type">Type</span>[<span class="hljs-type">Property</span>]<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h1 id="类型缩小"><a href="#类型缩小" class="headerlink" title="类型缩小"></a>类型缩小</h1><p>通常当一个类型非常宽泛时，实际去使用时却要去具体到某一个类型，这时就要缩小类型，防止报错</p>
+<blockquote>
+<p>typeof 类型守卫</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params">x?: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span> | <span class="hljs-built_in">number</span>[]</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> x === <span class="hljs-string">&#x27;object&#x27;</span>)&#123;<br>        <span class="hljs-built_in">console</span>.log(x.push(<span class="hljs-number">1</span>)) <span class="hljs-comment">// 利用typeof将 x 收窄</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>真实性 收窄</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params">x?: <span class="hljs-built_in">string</span></span>) </span>&#123;<br>    <span class="hljs-keyword">if</span>(x)&#123;<br>        <span class="hljs-built_in">console</span>.log(x)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>相等性收窄</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params">x: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>, y: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">boolean</span></span>) </span>&#123;<br>    <span class="hljs-keyword">if</span>(x === y)&#123;<br>        <span class="hljs-built_in">console</span>.log(x.up)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>in 运算符收窄</p>
+</blockquote>
+<blockquote>
+<p>instanceof</p>
+</blockquote>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
-                    
-                  </div>
                 
               </div>
               
@@ -277,18 +282,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/08/ts-utils/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ts-utils</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/27/ts-alias/">
-                        <span class="hidden-mobile">ts-alias</span>
+                      <a href="/2022/03/07/review-js/">
+                        <span class="hidden-mobile">review-js</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
