@@ -4,10 +4,7 @@ date: 2021-09-08 19:42:11
 tags: typescript
 ---
 
-## From type-challenges
-
-题目基本来自
-https://github.com/type-challenges/type-challenges/blob/master/README.zh-CN.md
+## 基础类型的应用
 
 ### 实现 Exclude
 
@@ -34,7 +31,7 @@ type MyExtract<T, U> = T extends U ? T : never;
 
 属性名可以是一个联合属性
 
-```
+```typescript
 
 type MyPick<T, K extends keyof T> = {
     [P in K]: T[P]
@@ -56,7 +53,7 @@ type a = Pick<testData, 'age' | 'name'> // {age: number, name: string}
 
 首先借用 Exclude 将不必要的属性名排除掉 ，返回新的属性名集合，再通过 Pick 用该属性名集合获取最新的接口类型
 
-```
+```typescript
 
 type MyOmit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
@@ -81,34 +78,76 @@ type MyReadOnly<T> = {
 }
 ```
 
-### 实现 Partial
+### 实现 Partial & Required & DeepPartial
+>利用映射类型的操作符 + — ？ 对类型进行操作，将属性全变为可选
+>对象类型的可选实现，使用递归去遍历每一个属性
 
-将属性全变为可选
-
-```
+实现可选，则使用 +？去修饰属性，+可省略
+```typescript
 type MyPartial<T> = {
     [K in keyof T]?: T[K]
 }
+
+
+type DeepPartial<T> = T extends object ? {
+    [K in keyof T]?: DeepPartial<T[K]>
+} : T
+
+interface Todo {
+    title: string
+    description: string
+    personal: {
+        age: number,
+        name: string
+    }
+}
+
+type a = DeepPartial<Todo>
+
+let b: a = {
+    title: '1321',
+    personal: {
+        name: '13213'
+    }
+
+}
+
 ```
 
-### 实现 Required
-
-将属性变为必选
-
-```
+实现必选，则使用 -？去修饰属性，去除原有？
+```typescript
 type MyRequired<T> = {
     [K in keyof T]-?: T[K]
 }
+
+
+type DeepRequired<T> = T extends object ? {
+    [K in keyof T]-?: DeepRequired<T[K]>
+} : T
+
+
+
+interface Props {
+    a?: number;
+    b?: string;
+}
+
+type obj = MyRequired<Props>
+
+const obj2: obj = { a: 5, b: '1231' };
 ```
+
+
+
 
 ### 实现 Record
 
-就是遍历第一个参数的每个子类型，然后将值设置为第二参数
+>就是遍历第一个参数的每个子类型，然后将值设置为第二参数
+keyof any 得到的是 string | number | symbol
 
-```
-type Record<K extends keyof any, T> = {
-  [P in K]: T
-}
+>**必须约束对象的属性 key 的类型为 string | number | symbol 之一**
+
+```typescript
 
 type MyRecord<K extends keyof any, T> = {
     [P in K]: T
@@ -129,9 +168,7 @@ type d = MyRecord<keyof a,b>
 
 ```
 
-keyof any 得到的是 string | number | symbol
 
-约束 key 的类型为 string | number | symbol 之一
 
 ### 元祖转对象
 
@@ -704,3 +741,7 @@ type AnyOf<T extends any[]> = T extends [infer F, ...(infer Reset)] ? F extends 
 type Sample1 = AnyOf<[1, "", false, [], {}]>; // expected to be true.
 type Sample2 = AnyOf<[]>; // expected to be false.
 ```
+
+
+>题目来自
+https://github.com/type-challenges/type-challenges/blob/master/README.zh-CN.md

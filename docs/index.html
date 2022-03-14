@@ -278,9 +278,8 @@ Javascript Number 类型为IEEE 754 64位双精度浮点格式（64位的二进�
           
             
           
-          From type-challenges题目基本来自https://github.com/type-challenges/type-challenges/blob/master/README.zh-CN.md
-实现 Exclude从当前类型中排查掉提供的类型（提供的是类型而不是属性名，和 omit 区分开发）这个提供的类型不一定约束为当前目前类型的子类型
-123type MyExclude&lt;
+          基础类型的应用实现 Exclude从当前类型中排查掉提供的类型（提供的是类型而不是属性名，和 omit 区分开发）这个提供的类型不一定约束为当前目前类型的子类型
+123type MyExclude&lt;T, U&gt; = T extends U ? never : Ttype newType = MyExclude&lt;string | number, string&gt; // numbe
         </a>
       </p>
 
