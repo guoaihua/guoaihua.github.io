@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="ziming">
+  <meta name="keywords" content="">
+  
+  <title>ts-utils-advance - 学无止境</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null},"tajs":null}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>ziming</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ts-utils-advance">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-15 16:55" pubdate>
+        2022年3月15日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      51
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ts-utils-advance</h1>
+            
+            <div class="markdown-body">
+              <h2 id="高级类型"><a href="#高级类型" class="headerlink" title="高级类型"></a>高级类型</h2><h3 id="ReturnType-获取函数返回类型"><a href="#ReturnType-获取函数返回类型" class="headerlink" title="ReturnType 获取函数返回类型"></a>ReturnType 获取函数返回类型</h3><p>不使用 ReturnType 实现 TypeScript 的 ReturnType<T> 范型。<br>infer 推断返回类型</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">MyReturnType&lt;T</span> <span class="hljs-keyword">extends</span> (<span class="hljs-params">...args: any</span>)<span class="hljs-title">=&gt;any</span> <span class="hljs-title">&gt;</span> </span>= <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> (...args: any)=&gt; infer <span class="hljs-type">R</span> ? <span class="hljs-type">R</span> : never<br><br><br>const fn = (v: boolean) =&gt; &#123;<br>    <span class="hljs-keyword">if</span> (v)<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-number">2</span><br>  &#125;<br><br>  <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">a</span> </span>= <span class="hljs-type">MyReturnType</span>&lt;typeof fn&gt; <span class="hljs-comment">// 应推导出 &quot;1 | 2&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="ReadyOnly2"><a href="#ReadyOnly2" class="headerlink" title="ReadyOnly2"></a>ReadyOnly2</h3><p>实现一个通用 MyReadonly2&lt;T, K&gt;，它带有两种类型的参数 T 和 K。</p>
+<p>K 指定应设置为 Readonly 的 T 的属性集。如果未提供 K，则应使所有属性都变为只读，就像普通的 Readonly<T>一样。</p>
+<p>例如</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs scala">interface <span class="hljs-type">Todo</span> &#123;<br>  title: string<br>  description: string<br>  completed: boolean<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">MyReadonly2&lt;T</span>,<span class="hljs-title">K</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">keyof</span> <span class="hljs-title">T</span> </span>= keyof <span class="hljs-type">T</span>&gt; = &#123;<br>    readonly [<span class="hljs-type">P</span> in <span class="hljs-type">K</span>]: <span class="hljs-type">T</span>[<span class="hljs-type">P</span>]<br>&#125; &amp; <span class="hljs-type">T</span>  <span class="hljs-comment">// 默认值使用es6的默认值， 使用新的类型和原有类型交叉，key相同时，readonly会增加</span><br><br>const todo: <span class="hljs-type">MyReadonly2</span>&lt;<span class="hljs-type">Todo</span>, <span class="hljs-symbol">&#x27;titl</span>e&#x27; | <span class="hljs-symbol">&#x27;descriptio</span>n&#x27;&gt; = &#123;<br>  title: <span class="hljs-string">&quot;Hey&quot;</span>,<br>  description: <span class="hljs-string">&quot;foobar&quot;</span>,<br>  completed: <span class="hljs-literal">false</span>,<br>&#125;<br><br>todo.title = <span class="hljs-string">&quot;Hello&quot;</span> <span class="hljs-comment">// Error: cannot reassign a readonly property</span><br>todo.description = <span class="hljs-string">&quot;barFoo&quot;</span> <span class="hljs-comment">// Error: cannot reassign a readonly property</span><br>todo.completed = <span class="hljs-literal">true</span> <span class="hljs-comment">// OK</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="深度-Readonly"><a href="#深度-Readonly" class="headerlink" title="深度 Readonly"></a>深度 Readonly</h3><p>实现一个通用的 DeepReadonly<T>，它将对象的每个参数及其子对象递归地设为只读</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">X</span> = &#123;</span><br><span class="hljs-class">  <span class="hljs-title">x</span>: &#123;</span><br><span class="hljs-class">    <span class="hljs-title">a</span>: 1</span><br><span class="hljs-class">    <span class="hljs-title">b</span>: &#x27;<span class="hljs-title">hi&#x27;</span></span><br><span class="hljs-class">  &#125;</span><br>  y: &#x27;hey&#x27;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">Expected</span> = &#123;</span><br><span class="hljs-class">  <span class="hljs-title">readonly</span> <span class="hljs-title">x</span>: &#123;</span><br><span class="hljs-class">    <span class="hljs-title">readonly</span> <span class="hljs-title">a</span>: 1</span><br><span class="hljs-class">    <span class="hljs-title">readonly</span> <span class="hljs-title">b</span>: &#x27;<span class="hljs-title">hi&#x27;</span></span><br><span class="hljs-class">  &#125;</span><br>  readonly y: &#x27;hey&#x27;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">DeepReadonly</span>&lt;<span class="hljs-type">T</span>&gt; = &#123;</span><br><span class="hljs-class">  <span class="hljs-title">readonly</span> [<span class="hljs-type">K</span> <span class="hljs-title">in</span> <span class="hljs-title">keyof</span> <span class="hljs-type">T</span>]: <span class="hljs-type">T</span>[<span class="hljs-type">K</span>] <span class="hljs-title">extends</span> <span class="hljs-title">object</span> ?  <span class="hljs-type">DeepReadonly</span>&lt;<span class="hljs-type">T</span>[<span class="hljs-type">K</span>]&gt; : <span class="hljs-type">T</span>[<span class="hljs-type">K</span>]</span><br><span class="hljs-class">&#125; // 对象才能继续深度遍历</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> todo = <span class="hljs-type">DeepReadonly</span>&lt;<span class="hljs-type">X</span>&gt; // should be same as `<span class="hljs-type">Expected</span>`</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="元组转集合"><a href="#元组转集合" class="headerlink" title="元组转集合"></a>元组转集合</h3><p>实现泛型 TupleToUnion<T>，它覆盖元组的值与其值联合</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Arr</span> </span>= [&#x27;<span class="hljs-number">1</span>&#x27;, &#x27;<span class="hljs-number">2</span>&#x27;, &#x27;<span class="hljs-number">3</span>&#x27;]<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">TupleToUnion&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">unknown</span>[]<span class="hljs-title">&gt;</span> </span>= <span class="hljs-type">T</span>[number]<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">a</span> </span>= <span class="hljs-type">TupleToUnion</span>&lt;<span class="hljs-type">Arr</span>&gt; <span class="hljs-comment">// expected to be &#x27;1&#x27; | &#x27;2&#x27; | &#x27;3&#x27;</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="可串联构造器"><a href="#可串联构造器" class="headerlink" title="可串联构造器"></a>可串联构造器</h3><p>在 JavaScript 中我们很常会使用可串联（Chainable&#x2F;Pipeline）的函数构造一个对象，但在 TypeScript 中，你能合理的给他附上类型吗？</p>
+<p>在这个挑战中，你可以使用任意你喜欢的方式实现这个类型 - Interface, Type 或 Class 都行。你需要提供两个函数 option(key, value) 和 get()。在 option 中你需要使用提供的 key 和 value 扩展当前的对象类型，通过 get 获取最终结果。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">// Record 使用key和value构建一个新的类型，最后返回一个全新的函数支持递归</span><br><br><span class="hljs-keyword">interface</span> <span class="hljs-title">Chainable</span>&lt;<span class="hljs-title">Tdict</span>=&#123;&#125;&gt; &#123;<br>  option: &lt;Tkey extends <span class="hljs-built_in">string</span>, Tvalue&gt;(key: Tkey, <span class="hljs-keyword">value</span>: Tvalue) =&gt; Chainable&lt; Tdict &amp;  Record&lt;Tkey, Tvalue&gt;&gt;,<br>  <span class="hljs-keyword">get</span>: ()=&gt; Tdict<br>&#125;<br><br>declare <span class="hljs-keyword">const</span> config: Chainable<br><br><span class="hljs-keyword">const</span> result = config<br>  .option(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">123</span>)<br>  .option(<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;type-challenges&#x27;</span>)<br>  .option(<span class="hljs-string">&#x27;bar&#x27;</span>, &#123; <span class="hljs-keyword">value</span>: <span class="hljs-string">&#x27;Hello World&#x27;</span> &#125;)<br>  .<span class="hljs-keyword">get</span>()<br><br><span class="hljs-comment">// 期望 result 的类型是：</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title">Result</span> &#123;<br>  foo: number<br>  name: <span class="hljs-built_in">string</span><br>  bar: &#123;<br>    <span class="hljs-keyword">value</span>: <span class="hljs-built_in">string</span><br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="最后一个元素"><a href="#最后一个元素" class="headerlink" title="最后一个元素"></a>最后一个元素</h3><p>实现一个通用 Last<T>，它接受一个数组 T 并返回其最后一个元素的类型</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">arr1</span> </span>= [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]<br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">arr2</span> </span>= [<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]<br><br><span class="hljs-comment">// 每次把数组分为当前元素和剩余元素，判断剩余元素个数，即可知道当前元素</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Last&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">unknown</span>[]<span class="hljs-title">&gt;</span> </span>= <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> [infer first, ...(infer <span class="hljs-type">Reset</span>)] ? <span class="hljs-type">Reset</span>[<span class="hljs-symbol">&#x27;lengt</span>h&#x27;] <span class="hljs-keyword">extends</span> <span class="hljs-number">0</span> ? first : <span class="hljs-type">Last</span>&lt;<span class="hljs-type">Reset</span>&gt; : never<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">tail1</span> </span>= <span class="hljs-type">Last</span>&lt;arr1&gt; <span class="hljs-comment">// expected to be &#x27;c&#x27;</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">tail2</span> </span>= <span class="hljs-type">Last</span>&lt;arr2&gt; <span class="hljs-comment">// expected to be 1</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="堆栈操作"><a href="#堆栈操作" class="headerlink" title="堆栈操作"></a>堆栈操作</h3><p>实现一个通用 Pop<T>，它接受一个数组 T 并返回一个没有最后一个元素的数组</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">arr1</span> </span>= [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;]<br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">arr2</span> </span>= [<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]<br><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Pop&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">unknown</span>[]<span class="hljs-title">&gt;</span> </span>=  <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> [...(infer <span class="hljs-type">Reset</span>), infer <span class="hljs-type">Last</span>] ? <span class="hljs-type">Reset</span> :never<br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Shift&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">unknown</span>[]<span class="hljs-title">&gt;</span> </span>=  <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> [infer <span class="hljs-type">First</span>, ...(infer <span class="hljs-type">Reset</span>)] ? <span class="hljs-type">Reset</span>:never<br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Push&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">unknown</span>[], <span class="hljs-title">K&gt;</span> </span>=  <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> unknown[] ? [...<span class="hljs-type">T</span>, <span class="hljs-type">K</span>] :never<br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Unshift&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">unknown</span>[], <span class="hljs-title">K&gt;</span> </span>=  <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> unknown[] ? [<span class="hljs-type">K</span>, ...<span class="hljs-type">T</span>] :never<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">re1</span> </span>= <span class="hljs-type">Pop</span>&lt;arr1&gt; <span class="hljs-comment">// expected to be [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">re2</span> </span>= <span class="hljs-type">Pop</span>&lt;arr2&gt; <span class="hljs-comment">// expected to be [3, 2]</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">re3</span> </span>= <span class="hljs-type">Shift</span>&lt;arr1&gt; <span class="hljs-comment">// expected to be [ &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;]</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">re4</span> </span>= <span class="hljs-type">Shift</span>&lt;arr2&gt; <span class="hljs-comment">// expected to be [ 2,1]</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">re5</span> </span>= <span class="hljs-type">Push</span>&lt;arr1, [&#x27;d&#x27;,<span class="hljs-symbol">&#x27;123</span>1&#x27;]&gt; <span class="hljs-comment">// expected to be [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, [&#x27;d&#x27;,&#x27;1231&#x27;]</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">re6</span> </span>= <span class="hljs-type">Push</span>&lt;arr2, <span class="hljs-number">4</span>&gt; <span class="hljs-comment">// expected to be [3,2,1,4]</span><br><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">re7</span> </span>= <span class="hljs-type">Unshift</span>&lt;arr1, [&#x27;d&#x27;,<span class="hljs-symbol">&#x27;123</span>1&#x27;]&gt; <span class="hljs-comment">// expected to be [[&#x27;d&#x27;,&#x27;1231&#x27;], &#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;]</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">re8</span> </span>= <span class="hljs-type">Unshift</span>&lt;arr2, <span class="hljs-number">4</span>&gt; <span class="hljs-comment">// expected to be [4,3,2,1]</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="PromiseAll"><a href="#PromiseAll" class="headerlink" title="PromiseAll"></a>PromiseAll</h3><p>键入函数 PromiseAll，它接受 PromiseLike 对象数组，返回值应为 Promise<T>，其中 T 是解析的结果数组</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> promise1 = <span class="hljs-built_in">Promise</span>.resolve(<span class="hljs-number">3</span>);<br><span class="hljs-keyword">const</span> promise2 = <span class="hljs-number">42</span>;<br><span class="hljs-keyword">const</span> promise3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">100</span>, <span class="hljs-string">&#x27;foo&#x27;</span>);<br>&#125;);<br><br><span class="hljs-comment">// expected to be `Promise&lt;[number, number, string]&gt;`</span><br><br><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">PromiseAll</span>&lt;<span class="hljs-title">T</span> <span class="hljs-title">extends</span> <span class="hljs-title">any</span>[]&gt;(<span class="hljs-params">values: <span class="hljs-keyword">readonly</span> [...T]</span>): <span class="hljs-title">Promise</span>&lt;</span>&#123;<br>    [K <span class="hljs-keyword">in</span> keyof T]: T[K] <span class="hljs-keyword">extends</span> <span class="hljs-built_in">Promise</span>&lt;infer R&gt; ? R : T[K]<br>&#125;&gt;<br><span class="hljs-keyword">const</span> p = PromiseAll([promise1, promise2, promise3] <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="Type-Lookup"><a href="#Type-Lookup" class="headerlink" title="Type Lookup"></a>Type Lookup</h3><p>有时，您可能希望根据其属性在并集中查找类型。</p>
+<p>在此挑战中，我们想通过在联合 Cat | Dog 中搜索公共 type 字段来获取相应的类型。换句话说，在以下示例中，我们期望 LookUp&lt;Dog | Cat, ‘dog’&gt;获得 Dog，LookUp&lt;Dog | Cat, ‘cat’&gt;获得 Cat</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs scala">interface <span class="hljs-type">Cat</span> &#123;<br>    <span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-symbol">&#x27;ca</span>t&#x27;<br>    breeds: <span class="hljs-symbol">&#x27;Abyssinia</span>n&#x27; | <span class="hljs-symbol">&#x27;Shorthai</span>r&#x27; | <span class="hljs-symbol">&#x27;Cur</span>l&#x27; | <span class="hljs-symbol">&#x27;Benga</span>l&#x27;<br>  &#125;<br><br>  interface <span class="hljs-type">Dog</span> &#123;<br>    <span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-symbol">&#x27;do</span>g&#x27;<br>    breeds: <span class="hljs-symbol">&#x27;Houn</span>d&#x27; | <span class="hljs-symbol">&#x27;Brittan</span>y&#x27; | <span class="hljs-symbol">&#x27;Bulldo</span>g&#x27; | <span class="hljs-symbol">&#x27;Boxe</span>r&#x27;<br>    color: <span class="hljs-symbol">&#x27;brow</span>n&#x27; | <span class="hljs-symbol">&#x27;whit</span>e&#x27; | <span class="hljs-symbol">&#x27;blac</span>k&#x27;<br>  &#125;<br><br>  <span class="hljs-comment">// &#123;type: k&#125;表示更宽泛的父类型，而T 表示更具体的子类型</span><br>  <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">LookUp&lt;T</span> <span class="hljs-keyword">extends</span> </span>&#123; <span class="hljs-class"><span class="hljs-keyword">type</span></span>: any&#125;, <span class="hljs-type">K</span> <span class="hljs-keyword">extends</span> <span class="hljs-type">T</span>[<span class="hljs-symbol">&#x27;typ</span>e&#x27;]&gt; = <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> &#123;<span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-type">K</span>&#125; ? <span class="hljs-type">T</span> : never<br><br>  <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">MyDog</span> </span>= <span class="hljs-type">LookUp</span>&lt;<span class="hljs-type">Cat</span> | <span class="hljs-type">Dog</span>, <span class="hljs-symbol">&#x27;do</span>g&#x27;&gt; <span class="hljs-comment">// expected to be `Dog`</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Trim"><a href="#Trim" class="headerlink" title="Trim"></a>Trim</h3><p>Implement TrimLeft<T> which takes an exact string type and returns a new string with the whitespace beginning removed.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scala"><br><span class="hljs-comment">// 模板文字类型</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">TrimLeft&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string&gt;</span> </span>= <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> `$&#123;&#x27; &#x27; | &#x27;\n&#x27; | &#x27;\t&#x27;&#125;$&#123;infer <span class="hljs-type">SS</span>&#125;` ? <span class="hljs-type">TrimLeft</span>&lt;<span class="hljs-type">SS</span>&gt; : <span class="hljs-type">T</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">trimed</span> </span>= <span class="hljs-type">TrimLeft</span>&lt;&#x27;  <span class="hljs-type">Hello</span> <span class="hljs-type">World</span>  &#x27;&gt; <span class="hljs-comment">// expected to be &#x27;Hello World  &#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>trim</p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">// <span class="hljs-built_in">type</span> TrimLeft&lt;S <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span>&gt; = S <span class="hljs-keyword">extends</span> `$&#123;<span class="hljs-string">&#x27; &#x27;</span> | <span class="hljs-string">&#x27;\n&#x27;</span> | <span class="hljs-string">&#x27;\t&#x27;</span>&#125;$&#123;infer SS&#125;`?TrimLeft&lt;SS&gt;:S<br>// <span class="hljs-built_in">type</span> TrimRight&lt;S <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span>&gt; = S <span class="hljs-keyword">extends</span> `$&#123;infer SS&#125;$&#123;<span class="hljs-string">&#x27; &#x27;</span> | <span class="hljs-string">&#x27;\n&#x27;</span> | <span class="hljs-string">&#x27;\t&#x27;</span>&#125;`?TrimRight&lt;SS&gt;:S<br>// <span class="hljs-built_in">type</span> Trim&lt;S <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span>&gt; = TrimLeft&lt;TrimRight&lt;S&gt;&gt;<br><br><span class="hljs-built_in">type</span> Trim&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span>&gt; = T <span class="hljs-keyword">extends</span> `$&#123;infer SS&#125;$&#123;<span class="hljs-string">&#x27; &#x27;</span> | <span class="hljs-string">&#x27;\n&#x27;</span> | <span class="hljs-string">&#x27;\t&#x27;</span>&#125;` | `$&#123;<span class="hljs-string">&#x27; &#x27;</span> | <span class="hljs-string">&#x27;\n&#x27;</span> | <span class="hljs-string">&#x27;\t&#x27;</span>&#125;$&#123;infer SS&#125;` ? Trim&lt;SS&gt; : T<br><br><span class="hljs-built_in">type</span> trimed = Trim&lt;<span class="hljs-string">&#x27;  Hello World  &#x27;</span>&gt; // expected to be <span class="hljs-string">&#x27;Hello World&#x27;</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="Capitalize"><a href="#Capitalize" class="headerlink" title="Capitalize"></a>Capitalize</h3><p>Implement Capitalize<T> which converts the first letter of a string to uppercase and leave the rest as-is.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">// 还是利用模板文字类型, T的类型更具体，而`$&#123;infer R&#125;$&#123;infer F&#125;`是一个抽象类型作为父类型</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">MyCapitalize&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string&gt;</span> </span>= <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> `$&#123;infer <span class="hljs-type">R</span>&#125;$&#123;infer <span class="hljs-type">F</span>&#125;` ?  `$&#123;<span class="hljs-type">Uppercase</span>&lt;<span class="hljs-type">R</span>&gt;&#125;$&#123;<span class="hljs-type">F</span>&#125;` :<span class="hljs-type">T</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">capitalized</span> </span>= <span class="hljs-type">MyCapitalize</span>&lt;<span class="hljs-symbol">&#x27;hello</span> world&#x27;&gt; <span class="hljs-comment">// expected to be &#x27;Hello world&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Replace"><a href="#Replace" class="headerlink" title="Replace"></a>Replace</h3><p>Implement Replace&lt;S, From, To&gt; which replace the string From with To once in the given string S</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scala"><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Replace&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string</span>, <span class="hljs-title">K</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string</span>, <span class="hljs-title">P</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string&gt;</span> </span>= <span class="hljs-type">K</span> <span class="hljs-keyword">extends</span> &#x27;&#x27;? <span class="hljs-type">T</span> : <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> `$&#123;infer <span class="hljs-type">F</span>&#125;$&#123;<span class="hljs-type">K</span>&#125;$&#123;infer <span class="hljs-type">L</span>&#125;` ? `$&#123;<span class="hljs-type">F</span>&#125;$&#123;<span class="hljs-type">P</span>&#125;$&#123;<span class="hljs-type">L</span>&#125;` : <span class="hljs-type">K</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">replaced</span> </span>= <span class="hljs-type">Replace</span>&lt;<span class="hljs-symbol">&#x27;types</span> are fun!&#x27;, <span class="hljs-symbol">&#x27;fu</span>n&#x27;, <span class="hljs-symbol">&#x27;awesom</span>e&#x27;&gt; <span class="hljs-comment">// expected to be &#x27;types are awesome!&#x27;</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="ReplaceAll"><a href="#ReplaceAll" class="headerlink" title="ReplaceAll"></a>ReplaceAll</h3><p>Implement ReplaceAll&lt;S, From, To&gt; which replace the all the substring From with To in the given string S</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs scala"><br><br><span class="hljs-comment">//  对任意值，均可表示为`$&#123;infer F&#125;$&#123;infer T&#125;$&#123;infer L&#125;`, 然后对推测值递归处理</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">ReplaceAll&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string</span>, <span class="hljs-title">K</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string</span>, <span class="hljs-title">U</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string&gt;</span> </span>= <span class="hljs-type">K</span> <span class="hljs-keyword">extends</span> &#x27;&#x27; ? <span class="hljs-type">T</span> : <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> `$&#123;infer <span class="hljs-type">F</span>&#125;$&#123;infer <span class="hljs-type">K</span>&#125;$&#123;infer <span class="hljs-type">L</span>&#125;` ? `$&#123;<span class="hljs-type">F</span>&#125;$&#123;<span class="hljs-type">U</span>&#125;$&#123;<span class="hljs-type">ReplaceAll</span>&lt;<span class="hljs-type">L</span>, <span class="hljs-type">K</span>, <span class="hljs-type">U</span>&gt;&#125;` : <span class="hljs-type">T</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">replaced</span> </span>= <span class="hljs-type">ReplaceAll</span>&lt;<span class="hljs-symbol">&#x27;t</span> y p e s&#x27;, &#x27; &#x27;, &#x27;&#x27;&gt; <span class="hljs-comment">// expected to be &#x27;types&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="追加参数"><a href="#追加参数" class="headerlink" title="追加参数"></a>追加参数</h3><blockquote>
+<p>实现一个范型 AppendArgument&lt;Fn, A&gt;，对于给定的函数类型 Fn，以及一个任意类型 A，返回一个新的函数 G。G 拥有 Fn 的所有参数并在末尾追加类型为 A 的参数</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> Fn = <span class="hljs-function">(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-built_in">number</span><br><br><span class="hljs-comment">// 对参数的参数和返回值都可以使用 infer 推断</span><br><span class="hljs-keyword">type</span> AppendArgument&lt;T <span class="hljs-keyword">extends</span> (...args: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">any</span>, K&gt; = T <span class="hljs-keyword">extends</span> (...args: infer P) =&gt; infer R ? <span class="hljs-function">(<span class="hljs-params">x:K, ...args: P</span>) =&gt;</span> R : <span class="hljs-built_in">never</span><br><br><span class="hljs-keyword">type</span> Result = AppendArgument&lt;Fn, <span class="hljs-built_in">boolean</span>&gt;<br><span class="hljs-comment">// 期望是 (a: number, b: string, x: boolean) =&gt; number</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="Length-of-String"><a href="#Length-of-String" class="headerlink" title="Length of String"></a>Length of String</h3><p>Compute the length of a string literal, which behaves like String#length.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs scala"><br><span class="hljs-comment">// 字符串先转数组，再取数组的length</span><br><span class="hljs-comment">// 字符转数组，使用infer 分割， 递归</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">StringToArray&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string&gt;</span> </span>= <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> `$&#123;infer <span class="hljs-type">F</span>&#125;$&#123;infer <span class="hljs-type">R</span>&#125;` ? [<span class="hljs-type">F</span>, ...<span class="hljs-type">StringToArray</span>&lt;<span class="hljs-type">R</span>&gt;] : []<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">StringLength&lt;S</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string&gt;</span> </span>= <span class="hljs-type">StringToArray</span>&lt;<span class="hljs-type">S</span>&gt;[<span class="hljs-symbol">&#x27;lengt</span>h&#x27;]<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">a</span> </span>= <span class="hljs-type">StringLength</span>&lt;<span class="hljs-symbol">&#x27;12313</span> qawqe&#x27;&gt;  <span class="hljs-comment">// 11</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="Flatten"><a href="#Flatten" class="headerlink" title="Flatten"></a>Flatten</h3><p>In this challenge, you would need to write a type that takes an array and emitted the flatten array type.</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs inform7"><br>type Flatten&lt;T&gt; = T extends <span class="hljs-comment">[]</span> ? <span class="hljs-comment">[]</span> : T extends <span class="hljs-comment">[infer F, ...(infer R)]</span> ? <span class="hljs-comment">[...Flatten&lt;F&gt;, ...Flatten&lt;R&gt;]</span> : <span class="hljs-comment">[T]</span><br><br>type flatten = Flatten&lt;<span class="hljs-comment">[1, 2, <span class="hljs-comment">[3, 4]</span>, <span class="hljs-comment">[<span class="hljs-comment">[<span class="hljs-comment">[5]</span>]</span>]</span>]</span>&gt; // <span class="hljs-comment">[1, 2, 3, 4, 5]</span><br><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="NativeFlat"><a href="#NativeFlat" class="headerlink" title="NativeFlat"></a>NativeFlat</h3><blockquote>
+<p>使用映射类型的索引获取值<br>定义一个 NativeFlat 工具类型，支持把数组类型拍平（扁平化）</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> NativeFlat&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-built_in">any</span>[]&gt; = &#123;<br>    [K <span class="hljs-keyword">in</span> keyof T]: T[K] <span class="hljs-keyword">extends</span> <span class="hljs-built_in">any</span>[] ? T[K][<span class="hljs-built_in">number</span>] : T[K]<br>&#125;[<span class="hljs-built_in">number</span>]<br><br><span class="hljs-keyword">type</span> NaiveResult = NaiveFlat&lt;[[<span class="hljs-string">&#x27;a&#x27;</span>], [<span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>], [<span class="hljs-string">&#x27;d&#x27;</span>]]&gt;<br><span class="hljs-comment">// NaiveResult的结果： &quot;a&quot; | &quot;b&quot; | &quot;c&quot; | &quot;d&quot;</span><br><br><span class="hljs-keyword">type</span> DeepNativeFlat&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-built_in">any</span>[]&gt; = &#123;<br>    [K <span class="hljs-keyword">in</span> keyof T]: T[K] <span class="hljs-keyword">extends</span> <span class="hljs-built_in">any</span>[] ? DeepNativeFlat&lt;T[K]&gt; : T[K]<br>&#125;[<span class="hljs-built_in">number</span>]<br><br><span class="hljs-keyword">type</span> DeepTestResult = DeepFlat&lt;Deep&gt;<br><span class="hljs-comment">// DeepTestResult: &quot;a&quot; | &quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot;npx</span><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="AppendObject"><a href="#AppendObject" class="headerlink" title="AppendObject"></a>AppendObject</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs scala"><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Test</span> </span>= &#123; id: &#x27;<span class="hljs-number">1</span>&#x27; &#125;<br><br><span class="hljs-comment">// 合并交叉类型的对象</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">CombineObject&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Object&gt;</span> </span>= &#123;<br>    [<span class="hljs-type">K</span> in keyof <span class="hljs-type">T</span>]: <span class="hljs-type">T</span>[<span class="hljs-type">K</span>]<br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">AppendToObject&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">object</span>, <span class="hljs-title">K</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string</span>, <span class="hljs-title">P&gt;</span> </span>= <span class="hljs-type">CombineObject</span>&lt;<span class="hljs-type">T</span> &amp; &#123; [<span class="hljs-type">U</span> in <span class="hljs-type">K</span>]: <span class="hljs-type">P</span> &#125;&gt;<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Result</span> </span>= <span class="hljs-type">AppendToObject</span>&lt;<span class="hljs-type">Test</span>, <span class="hljs-symbol">&#x27;valu</span>e&#x27;, <span class="hljs-number">4</span>&gt; <span class="hljs-comment">// expected to be &#123; id: &#x27;1&#x27;, value: 4 &#125;</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="Absolute"><a href="#Absolute" class="headerlink" title="Absolute"></a>Absolute</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs scala"><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Test</span> </span>= <span class="hljs-number">-100</span>;<br><br><span class="hljs-comment">// 最后都是string</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Absolute&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string</span> <span class="hljs-title">|</span> <span class="hljs-title">number</span> <span class="hljs-title">|</span> <span class="hljs-title">bigint&gt;</span> </span>= `$&#123;<span class="hljs-type">T</span>&#125;` <span class="hljs-keyword">extends</span> `$&#123;&#x27;-&#x27;&#125;$&#123;infer <span class="hljs-type">R</span>&#125;` ? <span class="hljs-type">R</span> : `$&#123;<span class="hljs-type">T</span>&#125;`<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Result</span> </span>= <span class="hljs-type">Absolute</span>&lt;<span class="hljs-type">Test</span>&gt;; <span class="hljs-comment">// expected to be &quot;100&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="String-to-union"><a href="#String-to-union" class="headerlink" title="String to union"></a>String to union</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Test</span> </span>= <span class="hljs-symbol">&#x27;12</span>3&#x27;;<br><span class="hljs-comment">//  拆分字符串并递归，终止条件为&quot;&quot;</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">StringToUnion&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">string&gt;</span> </span>= <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> <span class="hljs-string">&quot;&quot;</span> ? never : <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> `$&#123;infer <span class="hljs-type">F</span>&#125;$&#123;infer <span class="hljs-type">L</span>&#125;` ? (<span class="hljs-type">F</span> | <span class="hljs-type">StringToUnion</span>&lt;<span class="hljs-type">L</span>&gt;) : <span class="hljs-type">T</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Result</span> </span>= <span class="hljs-type">StringToUnion</span>&lt;<span class="hljs-type">Test</span>&gt;; <span class="hljs-comment">// expected to be &quot;1&quot; | &quot;2&quot; | &quot;3&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Foo</span> </span>= &#123;<br>    a: number;<br>    b: string;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Bar</span> </span>= &#123;<br>    b: number;<br>    c: boolean;<br>&#125;;<br><span class="hljs-comment">// 交叉类型，如果是对象的话，key取的是并集，value取的才是交集</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Merge&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">object</span>, <span class="hljs-title">K</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">object&gt;</span> </span>= &#123;<br>    [<span class="hljs-type">P</span> in keyof (<span class="hljs-type">T</span> &amp; <span class="hljs-type">K</span>)]: <span class="hljs-type">P</span> <span class="hljs-keyword">extends</span> keyof <span class="hljs-type">K</span> ? <span class="hljs-type">K</span>[<span class="hljs-type">P</span>] : <span class="hljs-type">P</span> <span class="hljs-keyword">extends</span> keyof <span class="hljs-type">T</span> ? <span class="hljs-type">T</span>[<span class="hljs-type">P</span>] : never<br>&#125;<br><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">a</span> </span>= <span class="hljs-type">Merge</span>&lt;<span class="hljs-type">Foo</span>, <span class="hljs-type">Bar</span>&gt;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="CamelCase"><a href="#CamelCase" class="headerlink" title="CamelCase"></a>CamelCase</h3><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs elm"><br>//  <span class="hljs-type">Capitalize</span>&lt;<span class="hljs-type">Right</span>&gt; extends <span class="hljs-type">Right</span> 判断是否为-<br><br><span class="hljs-keyword">type</span> <span class="hljs-type">CamelCase</span>&lt;<span class="hljs-type">T</span> extends string&gt; = <span class="hljs-type">T</span> extends `$&#123;infer <span class="hljs-type">Left</span>&#125;-$&#123;infer <span class="hljs-type">Right</span>&#125;` ? <span class="hljs-type">Capitalize</span>&lt;<span class="hljs-type">Right</span>&gt; extends <span class="hljs-type">Right</span> ? `$&#123;<span class="hljs-type">Left</span>&#125;-$&#123;<span class="hljs-type">CamelCase</span>&lt;<span class="hljs-type">Capitalize</span>&lt;<span class="hljs-type">Right</span>&gt;&gt;&#125;` : `$&#123;<span class="hljs-type">Left</span>&#125;$&#123;<span class="hljs-type">CamelCase</span>&lt;<span class="hljs-type">Capitalize</span>&lt;<span class="hljs-type">Right</span>&gt;&gt;&#125;` : <span class="hljs-type">T</span><br><br><span class="hljs-keyword">type</span> a = <span class="hljs-type">CamelCase</span>&lt;&#x27;foo-bar-baz-a&#x27;&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Diff"><a href="#Diff" class="headerlink" title="Diff"></a>Diff</h3><p>Get an Object that is the difference between O &amp; O1</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs dts">type Foo = &#123;<br><span class="hljs-symbol">    name:</span> string<br><span class="hljs-symbol">    age:</span> string<br>  &#125;<br>  type Bar = &#123;<br><span class="hljs-symbol">    name:</span> string<br><span class="hljs-symbol">    age:</span> string<br><span class="hljs-symbol">    gender:</span> number<br>  &#125;<br><br>  <span class="hljs-comment">//  使用交叉类型获得交叉集合</span><br>  type Diff<span class="hljs-params">&lt;T, K&gt;</span> = Pick<span class="hljs-params">&lt;T &amp; K, Exclude&lt;keyof T, keyof K&gt;</span> | Exclude<span class="hljs-params">&lt;keyof K, keyof T&gt;</span>&gt;<br><br>  type a = Diff<span class="hljs-params">&lt;Foo, Bar&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="AnyOf"><a href="#AnyOf" class="headerlink" title="AnyOf"></a>AnyOf</h3><p>Implement Python liked any function in the type system. A type takes the Array and returns true if any element of the Array is true. If the Array is empty, return false.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs scala"><br><span class="hljs-comment">// 所有假值得联合类型</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">FalseUnion</span> </span>= <span class="hljs-literal">false</span> | &#x27;&#x27; | <span class="hljs-number">0</span> | <span class="hljs-type">Record</span>&lt;string| number, never&gt; |[]<br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">AnyOf&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">any</span>[]<span class="hljs-title">&gt;</span> </span>= <span class="hljs-type">T</span> <span class="hljs-keyword">extends</span> [infer <span class="hljs-type">F</span>, ...(infer <span class="hljs-type">Reset</span>)] ? <span class="hljs-type">F</span> <span class="hljs-keyword">extends</span> <span class="hljs-type">FalseUnion</span>? <span class="hljs-type">AnyOf</span>&lt;<span class="hljs-type">Reset</span>&gt;: <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span><br><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Sample1</span> </span>= <span class="hljs-type">AnyOf</span>&lt;[<span class="hljs-number">1</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">false</span>, [], &#123;&#125;]&gt;; <span class="hljs-comment">// expected to be true.</span><br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Sample2</span> </span>= <span class="hljs-type">AnyOf</span>&lt;[]&gt;; <span class="hljs-comment">// expected to be false.</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="键重映射的应用"><a href="#键重映射的应用" class="headerlink" title="键重映射的应用"></a>键重映射的应用</h3><blockquote>
+<p>映射类型中使用 as 将key重新映射，中间可以使用各种运算符，返回never表示去除改属性</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">interface</span> Example &#123;<br>    a: <span class="hljs-built_in">string</span>;<br>    b: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>;<br>    c: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span>;<br>    d: &#123;&#125;;<br>&#125;<br><br><br><br><span class="hljs-comment">// 键重映射</span><br><span class="hljs-keyword">type</span> ConditionalPick&lt;T, U&gt; = &#123;<br>    [K <span class="hljs-keyword">in</span> keyof T <span class="hljs-keyword">as</span> T[K] <span class="hljs-keyword">extends</span> U ? K : <span class="hljs-built_in">never</span>]: T[K]<br>&#125;<br><br><br><br><span class="hljs-comment">// 测试用例：</span><br><span class="hljs-keyword">type</span> StringKeysOnly = ConditionalPick&lt;Example, <span class="hljs-built_in">string</span>&gt;;<br><span class="hljs-comment">//=&gt; &#123;a: string&#125;</span><br><br><br><br><span class="hljs-comment">// 去除类型中某个属性</span><br><span class="hljs-keyword">type</span> ConditionalDelete&lt;T, U&gt; = &#123;<br>    [K <span class="hljs-keyword">in</span> keyof T <span class="hljs-keyword">as</span> Exclude&lt;K, U&gt;]: T[K]<br>&#125;<br><span class="hljs-keyword">type</span> test = ConditionalDelete&lt;Example, <span class="hljs-string">&#x27;a&#x27;</span>&gt;;<br><span class="hljs-comment">//</span><br><span class="hljs-comment">// type test = &#123;</span><br><span class="hljs-comment">//     b: string | number;</span><br><span class="hljs-comment">//     c: () =&gt; void;</span><br><span class="hljs-comment">//     d: &#123;&#125;;</span><br><span class="hljs-comment">// &#125;</span><br><br><br><span class="hljs-comment">// 将某个属性变为大写</span><br><span class="hljs-keyword">type</span> ConditionalCapitalize&lt;T, U&gt; = &#123;<br>    [K <span class="hljs-keyword">in</span> keyof T <span class="hljs-keyword">as</span> K <span class="hljs-keyword">extends</span> U ? <span class="hljs-string">`test<span class="hljs-subst">$&#123;Capitalize&lt;<span class="hljs-built_in">string</span> &amp; K&gt;&#125;</span>`</span> : K]: T[K]<br>&#125;<br><br><span class="hljs-keyword">type</span> test1 = ConditionalCapitalize&lt;Example, <span class="hljs-string">&#x27;a&#x27;</span>&gt;;<br><br><span class="hljs-comment">// type test1 = &#123;</span><br><span class="hljs-comment">//     testA: string;</span><br><span class="hljs-comment">//     b: string | number;</span><br><span class="hljs-comment">//     c: () =&gt; void;</span><br><span class="hljs-comment">//     d: &#123;&#125;;</span><br><span class="hljs-comment">// &#125;</span><br></code></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>部分题目参考来自<br><a target="_blank" rel="noopener" href="https://github.com/type-challenges/type-challenges/blob/master/README.zh-CN.md">https://github.com/type-challenges/type-challenges/blob/master/README.zh-CN.md</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7009046640308781063">https://juejin.cn/post/7009046640308781063</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/11/review-types/">
+                        <span class="hidden-mobile">review-types</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
