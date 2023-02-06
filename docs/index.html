@@ -182,6 +182,94 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/03/31/refactor-method/">重构-手法</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/31/refactor-method/">
+          
+          
+            
+          
+          简化条件表达式将一个复杂的条件逻辑分解成若干块，分离分支逻辑和操作细节
+
+分解条件表达式条件和逻辑都是使用一个新的函数拆分，清晰的表述意图
+
+
+合并条件表达式多个分支条件判断却得到相同结果时，需要合并条件表达式(使用逻辑与、或，或者三元运算符)，同时将条件抽取为一个函数，对厘清代码意图具有显著作用
+
+
+合并重复的代码片段不随条件变化的代码，抽离到条件之外
+
+
+移除控制标记使用break或者retu
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-31 15:55" pubdate>
+              2022-03-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/31/refactor/">重构-坏代码的味道</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/31/refactor/">
+          
+          
+            
+          
+          重复代码
+重复出现的代码片段，甚至是表达式都应该被抽离成公共函数
+
+过长的函数
+每当需要使用注释来说明的时候，都要考虑把需要说明的东西放进函数，以其用途命名（而不是实现手法命名）
+
+过长参数
+过长的参数会带来巨大的维护成本，使用对象替换过长的参数
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-31 11:33" pubdate>
+              2022-03-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/03/15/ts-utils-advance/">ts-utils-advance</a>
       </h1>
 
@@ -251,7 +339,7 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/07/review-js/">review-js</a>
+        <a href="/2022/03/07/review-js/">温故而知新</a>
       </h1>
 
       <p class="index-excerpt">
@@ -503,90 +591,6 @@ fiber架构增量渲染，将渲染任务分片，使任务可中断、可回复
             <i class="iconfont icon-date"></i>
             <time datetime="2021-07-13 22:38" pubdate>
               2021-07-13
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/React/">React</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/12/react-setState/">react-setState</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/12/react-setState/">
-          
-          
-            
-          
-          setState 调用之后触发的生命周期setState -&gt; shouldComponentUpdate -&gt; componentWillUpdate -&gt; render -&gt; componentDidUpdate
-异步更新的动机批量更新
-1234567891011121314151617181920212223242526272829303132333435363738
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/React/">React</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/12/react-reconciliation/">react-reconciliation</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/12/react-reconciliation/">
-          
-          
-            
-          
-          虚拟dom概念：使用js对象对真实dom的一种描述原理：    js操作-&gt;真实dom渲染 这一层中间加了一层    js操作-&gt;虚拟dom diff-&gt;真实dom渲染优化：    差量更新：当 DOM 操作（渲染更新）比较频繁时，它会先将前后两次的虚拟 DOM 树进行对比，定位出具体需要更新的部分，生成一个“补丁集”，最后只把“补丁”打在需要更新的那部分真实 DOM 上，实现精
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:08" pubdate>
-              2021-07-12
             </time>
           </div>
         

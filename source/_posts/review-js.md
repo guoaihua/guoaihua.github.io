@@ -1,5 +1,5 @@
 ---
-title: review-js
+title: 温故而知新
 date: 2022-03-07 21:00:18
 tags: 温故而知新
 ---
@@ -103,7 +103,8 @@ a.toFixed(); // a在被调用前，进行了装箱操作
     具有行为，行为可以改变状态
 
 # 事件循环
-微任务总是在当前队列的尾部添加,宏任务则添添加下一个循环
+>宏任务是一个一个从队列中取出执行，微任务是一整个队列执行完，才开始下一个宏任务
+微任务总是在当前队列的尾部添加,宏任务则添加下一个循环
 ```javascript
   setTimeout(()=>console.log("d"), 0)
     var r = new Promise(function(resolve, reject){

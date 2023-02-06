@@ -18,7 +18,7 @@
   <meta name="author" content="ziming">
   <meta name="keywords" content="">
   
-  <title>review-js - 学无止境</title>
+  <title>温故而知新 - 学无止境</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="review-js">
+            <span class="h2" id="subtitle" title="温故而知新">
               
             </span>
 
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      989 字
+      1k 字
     </span>
   
 
@@ -225,7 +225,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">review-js</h1>
+            <h1 style="display: none">温故而知新</h1>
             
             <div class="markdown-body">
               <h1 id="数字的最大长度"><a href="#数字的最大长度" class="headerlink" title="数字的最大长度"></a>数字的最大长度</h1><blockquote>
@@ -259,7 +259,9 @@
 具有状态，同一个对象可以处于不同的状态
 具有行为，行为可以改变状态
 </code></pre>
-<h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h1><p>微任务总是在当前队列的尾部添加,宏任务则添添加下一个循环</p>
+<h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h1><blockquote>
+<p>宏任务是一个一个从队列中取出执行，微任务是一整个队列执行完，才开始下一个宏任务<br>微任务总是在当前队列的尾部添加,宏任务则添加下一个循环</p>
+</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;d&quot;</span>), <span class="hljs-number">0</span>)<br>  <span class="hljs-keyword">var</span> r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>)</span>&#123;<br>      resolve()<br>  &#125;);<br>  r.then(<span class="hljs-function">() =&gt;</span> &#123; <br>      <span class="hljs-keyword">var</span> begin = <span class="hljs-built_in">Date</span>.now();<br>      <span class="hljs-keyword">while</span>(<span class="hljs-built_in">Date</span>.now() - begin &lt; <span class="hljs-number">1000</span>);<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;c1&quot;</span>) <br>      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;e&quot;</span>), <span class="hljs-number">0</span>)<br>      <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>)</span>&#123;<br>          resolve()<br>      &#125;).then(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;c2&quot;</span>))<br>  &#125;);<br>  <span class="hljs-comment">// c1 -&gt; c2 -&gt; d -&gt; e</span><br></code></pre></td></tr></table></figure>
 
 <p>实现一个红绿灯</p>

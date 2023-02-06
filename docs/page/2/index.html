@@ -182,6 +182,90 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/07/12/react-setState/">react-setState</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/12/react-setState/">
+          
+          
+            
+          
+          setState 调用之后触发的生命周期setState -&gt; shouldComponentUpdate -&gt; componentWillUpdate -&gt; render -&gt; componentDidUpdate
+异步更新的动机批量更新
+1234567891011121314151617181920212223242526272829303132333435363738
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-12 22:28" pubdate>
+              2021-07-12
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/React/">React</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/12/react-reconciliation/">react-reconciliation</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/12/react-reconciliation/">
+          
+          
+            
+          
+          虚拟dom概念：使用js对象对真实dom的一种描述原理：    js操作-&gt;真实dom渲染 这一层中间加了一层    js操作-&gt;虚拟dom diff-&gt;真实dom渲染优化：    差量更新：当 DOM 操作（渲染更新）比较频繁时，它会先将前后两次的虚拟 DOM 树进行对比，定位出具体需要更新的部分，生成一个“补丁集”，最后只把“补丁”打在需要更新的那部分真实 DOM 上，实现精
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-12 22:08" pubdate>
+              2021-07-12
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/React/">React</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/07/08/react-hooks/">react-hooks</a>
       </h1>
 
@@ -495,78 +579,6 @@ v8引擎会把堆分成新生代和老生代两个区域，新生代放置生存
             <i class="iconfont icon-date"></i>
             <time datetime="2020-07-27 22:40" pubdate>
               2020-07-27
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/07/23/memory/">store of data</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/07/23/memory/">
-          
-          
-            
-          
-          栈内存与堆内存如何存储数据值类型的数据通常保存在栈中，栈空间用来保存执行上下文引用类型的数据通常保存在堆中，并且在栈中留下引用
-栈空间需要用来维护程序执行期间执行上下文的状态，为了提高执行上下文的切换效率，栈的空间一定要相对来说较小
-闭包的内存模型12345678910111213141516171819function foo() &#123;    var myName = &quot; 极客
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-23 21:47" pubdate>
-              2020-07-23
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/07/22/this/">understand  this &amp; scope chain</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/07/22/this/">
-          
-          
-            
-          
-          this执行上下文中除了变量环境、词法环境、outer还有this，this是和执行上下文绑定的在对象内部方法中使用对象内部的属性。作用域链与this是2个独立的不同的系统
-判断要数this 的绑定和函数声明的位置无关，只取决于函数的调用方式,看它真实的调用的对象.
-12345678910function foo()&#123;    var a = 1;    bar(); // Referen
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-22 22:17" pubdate>
-              2020-07-22
             </time>
           </div>
         
