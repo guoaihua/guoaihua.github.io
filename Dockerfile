@@ -1,4 +1,6 @@
-FROM nginx
-RUN  rm  /usr/share/nginx/html/index.html
-COPY ./docs /usr/share/nginx/html/
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:18
+COPY package*.json .
+RUN npm install --regisry=https://registry.npm.taobao.org && npx hexo build
+COPY . .
+EXPOSE 4000
+CMD ["node","index.js"]
