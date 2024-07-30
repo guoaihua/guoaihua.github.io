@@ -67,6 +67,13 @@ interface testData {
 type a = MyOmit<testData, 'age' | 'name'> // {test:()=>void}
 
 ```
+利用 映射类型过滤不需要的key
+https://www.typescriptlang.org/docs/handbook/2/mapped-types.html
+```
+  type MyOmit<T, U extends keyof T> = {
+    [key in keyof T as key extends U ? never : key]: T[key]
+  }
+```
 
 ### 实现 ReadOnly
 
@@ -257,12 +264,35 @@ type spaceXLength = Length<spaceX> // expected 5
 
 利用 infer 解包
 约束 Promise 时使用 unknown 而非 any，因为它更安全
+为什么更安全？
+类型检查和函数调用，unknown会更严格，需要明确的类型才能操作，而any不用
+```
+ let x: unknown
+ x.split('') // error
+
+let x: unknown
+typeof x === 'number' && x.toString()
+ 
+ let x: any
+ x.split('') // no error
+
+```
 
 ```
 type UnPackPromise<T extends Promise<unknown>> = T extends Promise<infer R> ? R :never
 
 type a = UnPackPromise<Promise<string>> // string
+
+
+// 深度递归解析
+type MyAwait<T extends Promise<unknown>> = T extends Promise<infer R> ? R extends Promise<unknown> ? MyAwait<R> : R : never
+
+
+type a = UnPackPromise<Promise<Promise<string>>> // string
+
 ```
+
+
 
 ### If
 
@@ -279,9 +309,12 @@ type B = If<false, 'a', 'b'> // expected to be 'b'
 
 Implement the JavaScript Array.concat function in the type system. A type takes the two arguments. The output should be a new array that includes inputs in ltr order
 
-...展开运算法也可以使用。。。
+...展开运算法也可以使用, 拓展任意长度
 
 ```
+
+type Concat<T extends any[], K extends any[]> = T extends [infer R] ? K extends [infer Q] ? [R, Q] : never : never;
+
 type Concat<T extends unknown[],K extends unknown[]> =  [ ...T, ...K]
 
 type Result = Concat<[1], [2]> // expected to be [1, 2]
@@ -291,9 +324,9 @@ type Result = Concat<[1], [2]> // expected to be [1, 2]
 
 Implement the JavaScript Array.includes function in the type system. A type takes the two arguments. The output should be a boolean true or false
 
-keyof A： 取的是 A 中所有公共属性名的联合
+keyof A： 取的是 A 中所有key联合
 
-A[keyof A]: A 所有值（key 的类型）组成的联合类型
+A[keyof A]: A 所有值的联合类型
 
 ```
 type Includes<A extends any[], T> = T extends A[keyof A] ? true : false
@@ -336,6 +369,13 @@ type TupleToObj<T extends any[]> = {
 type MyIncludes<T extends any[], K> = TupleToObj<T>[K] extends K ? true : false
 
 type isPillarMen = MyIncludes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Kars'>
+
+```
+
+```
+type IsEqual<T, K > = K extends T ? true : false 
+
+type Includes<T extends any[], K> = T extends [infer F, ...infer R] ? IsEqual<F, K> extends true ? true : Includes<R, K> : false
 
 ```
 

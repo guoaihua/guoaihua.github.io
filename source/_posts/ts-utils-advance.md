@@ -55,6 +55,19 @@ todo.completed = true // OK
 
 ```
 
+使用映射类型与交叉类型，
+先取指定元素加上readonly
+然后给非指定类型去除readonly
+两者取交集
+注意默认值：keyof T
+```
+  type MyReadonly2<T, K extends keyof T = keyof T> = {
+    +readonly [P in keyof T as P extends K ? P : never]: T[P]
+  } & {
+    -readonly [P in keyof T as P extends K ? never : P]: T[P]
+  }
+```
+
 ### 深度 Readonly
 
 实现一个通用的 DeepReadonly<T>，它将对象的每个参数及其子对象递归地设为只读
