@@ -1,5 +1,5 @@
 ---
-title: ts-utils-advance
+title: ts-高级类型
 date: 2022-03-15 16:55:22
 ---
 
@@ -100,8 +100,14 @@ type todo = DeepReadonly<X> // should be same as `Expected`
 
 实现泛型 TupleToUnion<T>，它覆盖元组的值与其值联合
 
+
 ```
-type Arr = ['1', '2', '3']
+
+// 数组转元组
+const a = ['1', '2', '3'] as const 
+
+// 获取a的类型
+type Arr = typeof a
 
 type TupleToUnion<T extends unknown[]> = T[number]
 
@@ -523,6 +529,98 @@ type test1 = ConditionalCapitalize<Example, 'a'>;
 // }
 ```
 
+### 实现一个 Split 工具类型
+根据给定的分隔符（Delimiter）对包含分隔符的字符串进行切割。可用于定义 String.prototype.split 方法的返回值类型
+```
+type Item = 'semlinker,lolo,kakuqo';
+
+type Split<
+	T extends string, 
+	Delimiter extends string,
+> = T extends `${infer F}${Delimiter}${infer K}` ? [F, ...Split<K, Delimiter>] : [T]  
+
+type ElementType = Split<Item, ','>; // ["semlinker", "lolo", "kakuqo"]
+```
+
+### 实现一个 ToPath 工具类型
+用于把属性访问（. 或 []）路径转换为元组的形式
+```
+
+type ToPath2<S extends string> = S extends `${infer F}[${infer B}]` ? [F, B] : [S]
+
+type ToPath<S extends string> = S extends `${infer F}.${infer R}` ? [...ToPath2<F>, ...ToPath<R>] : [S] 
+
+
+type c = flatten<[[1,2],3]>
+
+type a = ToPath<'foo.bar.baz'> //=> ['foo', 'bar', 'baz']
+type b = ToPath<'foo[0].bar[0].baz'> //=> ['foo', '0', 'bar', 'baz']
+
+```
+
+## 几种常见类型的特殊技巧汇总
+1、映射类型的键值重新映射
+as never 过滤掉不需要的键， 可以很方便的去掉或者指定处理对象中的某些键；修改key为特殊的类型
+
+参考
+基础类型中的
+  readonly 指定类型readonly
+高级类型中的
+  键重映射的应用 去掉某个属性、将某个属性变为大小写或者修改key
+
+2、keyof类型运算符
+keyof any 获取 string | number | symbol 用于约束key
+参考
+基础类型中的
+实现 Record 约束必须是一个正常的对象属性
+
+3、条件类型
+1、在条件类型内推断，使用infer推断一个不确定的类型
+参考
+基础类型中的
+  获取元组长度 条件类型的约束与infer推断length
+  Awaited
+高级类型中的
+  ReturnType 获取函数返回类型
+  最后一个元素
+  堆栈操作
+  PromiseAll
+  Trim
+  Capitalize
+  Replace
+  追加参数
+  Length of String
+  Flatten
+  String to union
+2、条件类型的推断约束
+  推断一个确定的类型，然后可以使用该类型的一些属性
+  
+  获取元组长度 条件类型的约束与infer推断length
+
+3、索引访问
+数组类型通过number获取数组元素的联合类型
+基础类型中的
+    元祖转对象
+    元组转集合
+
+4、数组的一些方法使用
+T[0] T['length'] 拓展运算符
+基础类型中的
+  获取第一个元素
+  获取元组长度
+  Concat
+  Push & Unshif
+高级类型中的
+  Length of String 利用...解除嵌套数组
+  Flatten 
+
+5、模板字面量类型
+使用模板字面量进行推断，字符串操作几乎都会使用，Typescript尝试根据结构匹配给定的字符
+高级类型中的
+  Trim
+  Capitalize
+  Length of String
+  String to union
 
 >部分题目参考来自
 https://github.com/type-challenges/type-challenges/blob/master/README.zh-CN.md
