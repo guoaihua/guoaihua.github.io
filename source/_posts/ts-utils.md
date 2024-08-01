@@ -1,5 +1,5 @@
 ---
-title: ts-utils
+title: ts-实现常见的类型
 date: 2021-09-08 19:42:11
 tags: typescript
 ---
@@ -8,8 +8,11 @@ tags: typescript
 
 ### 实现 Exclude
 
-从当前类型中排查掉提供的类型（提供的是类型而不是属性名，和 omit 区分开发）
-这个提供的类型不一定约束为当前目前类型的子类型
+从当前类型中排查掉提供的类型（提供的是类型而不是属性名，和 omit 区分开）
+这个提供的类型不一定约束为当前目前类型的子类型，
+
+当确定的类型参数为联合类型时，就会被分配类型
+[TypeScript参考，分配条件类型](https://www.typescriptlang.org/zh/docs/handbook/2/conditional-types.html)
 
 ```
  type MyExclude<T, U> = T extends U ? never : T
@@ -23,6 +26,8 @@ tags: typescript
 
 ```
 type MyExtract<T, U> = T extends U ? T : never;
+
+type newType = MyExtract<string | number, string> // string
 ```
 
 ### 实现 pick
@@ -57,7 +62,6 @@ type a = Pick<testData, 'age' | 'name'> // {age: number, name: string}
 
 type MyOmit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
-
 interface testData {
     age: number
     name: string
@@ -66,13 +70,19 @@ interface testData {
 
 type a = MyOmit<testData, 'age' | 'name'> // {test:()=>void}
 
-```
-利用 映射类型过滤不需要的key
-https://www.typescriptlang.org/docs/handbook/2/mapped-types.html
+
+利用映射类型过滤不需要的key
+
+[TypeScript参考，通过as进行键重新映射](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+
 ```
   type MyOmit<T, U extends keyof T> = {
     [key in keyof T as key extends U ? never : key]: T[key]
   }
+
+  type MyOmit<T, U extends keyof T> = {
+  [key in keyof T as Exclude<key, U> ]: T[key]
+}
 ```
 
 ### 实现 ReadOnly
@@ -83,6 +93,23 @@ https://www.typescriptlang.org/docs/handbook/2/mapped-types.html
 type MyReadOnly<T> = {
     readonly [K in keyof T]: T[K]
 }
+```
+
+// 将指定属性设置为readonly(其它属性的操作都是同理，required )
+还是利用as进行了键值重新映射忽略不需要的类型，最后使用交叉类型合并选项
+```javascript
+type MyReadOnly2<T, U extends keyof T> = {
+  +readonly [key in keyof T as Extract<key, U>]: T[key]
+} & Omit<T, U>
+
+interface testData {
+    age: number
+    name: string
+    test: () => void
+}
+
+type d = MyReadOnly2<testData, 'age' | 'name'>
+
 ```
 
 ### 实现 Partial & Required & DeepPartial & DeepRequired
@@ -219,12 +246,31 @@ type d = MyRecord<keyof a,b>
 
 传入一个元组类型，将这个元组类型转换为对象类型，这个对象类型的键/值都是从元组中遍历出来
 
+T[number]可以获取数组元素的联合类型
+
+```
+const MyArray = [
+  { name: "Alice", age: 15 },
+  { name: "Bob", age: 23 },
+  { name: "Eve", age: 38 },
+];
+ 
+type Person = typeof MyArray[number];
+
+// type Person = {
+    name: string;
+    age: number;
+}
+```
+
 ```
 type TupleToObject<T extends readonly any[]> = {
     [K in T[number]]: K
 }
 
 const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
+ 
+type v =  typeof tuple[number] // "tesla" | "model 3" | "model X" | "model Y"
 
 type a = TupleToObject<typeof tuple> // expected { tesla: 'tesla', 'model 3': 'model 3', 'model X': 'model X', 'model Y': 'model Y'}
 
@@ -252,7 +298,7 @@ type tesla = ['tesla', 'model 3', 'model X', 'model Y']
 type spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT']
 
 type Length<T extends readonly any[]> = T extends { length: infer L } ? L : never
-// type Length<T extends readonly any[]> = T['length']
+// type Length<T extends readonly any[]> = T['length'] // length 为数组的属性
 type teslaLength = Length<tesla> // expected 4
 type spaceXLength = Length<spaceX> // expected 5
 ```
@@ -377,6 +423,12 @@ type IsEqual<T, K > = K extends T ? true : false
 
 type Includes<T extends any[], K> = T extends [infer F, ...infer R] ? IsEqual<F, K> extends true ? true : Includes<R, K> : false
 
+```
+
+判断对象属性是否存在
+```
+type Includes2<T extends {}, K> = K extends keyof T ? true : false
+type isPillarMen2 = Includes2<{a: 1, b:2}, 'b'| 'a'>
 ```
 
 ### Push & Unshift
