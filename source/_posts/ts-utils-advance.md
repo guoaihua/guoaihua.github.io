@@ -558,6 +558,16 @@ type b = ToPath<'foo[0].bar[0].baz'> //=> ['foo', '0', 'bar', 'baz']
 
 ```
 
+### 复杂类型转换为基本类型
+将类型为字面类型（标签类型）的属性，转换为基本类型
+```javascript
+/** 将字面量和函数转化成原始类型 */
+export type ToPrimitive<T> = T extends object ? T extends (...args: any) => any ? Function : {
+    [K in keyof T]: ToPrimitive<T[K]>
+  }: T extends {valueOf(): infer R} ? R : T
+
+```
+
 ## 特殊技巧汇总
 1、映射类型的键值重新映射
 as never 过滤掉不需要的键， 可以很方便的去掉或者指定处理对象中的某些键；修改key为特殊的类型
@@ -622,6 +632,10 @@ T[0] T['length'] 拓展运算符
   Length of String
   String to union
 
+6、调用对象方法获取原始类型
+  高级类型中的
+  复杂类型转换为基本类型
+  
 >部分题目参考来自
 https://github.com/type-challenges/type-challenges/blob/master/README.zh-CN.md
 https://juejin.cn/post/7009046640308781063
